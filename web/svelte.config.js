@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-static';
 import { execSync } from 'node:child_process';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { mdsvex } from 'mdsvex';
 
 let VERSION = `timestamp_${Date.now()}`;
 try {
@@ -26,25 +27,25 @@ try {
 const config = {
 	// Consult https://svelte.dev/docs/kit/integrations
 	// for more information about preprocessors
-	preprocess: vitePreprocess(),
-
+	preprocess: [
+		vitePreprocess(),
+		mdsvex({
+			extensions: ['.svx', '.md']
+		})
+	],
 	kit: {
-		version: {
-			name: VERSION
-		},
-		adapter: adapter({
-			assets: 'build',
-			pages: 'build'
-		}),
+		version: { name: VERSION },
+		adapter: adapter({ assets: 'build', pages: 'build', strict: false }),
 		serviceWorker: {
 			// we handle it ourselves here : src/service-worker-handler.ts
-			register: false,
+			register: false
 		},
 		paths: {
 			// this is to make it work on ipfs (on an unknown path)
-			relative: true,
-		},
-	}
+			relative: true
+		}
+	},
+	extensions: ['.svelte', '.svx', '.md']
 };
 
 export default config;

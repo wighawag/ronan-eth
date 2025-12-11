@@ -12,6 +12,7 @@
 		"@tailwindcss/vite": "^4.1.17",
 		"@types/node": "^24.3.0",
 		"ipfs-gateway-emulator": "4.2.1-ipfs.2",
+		"mdsvex": "^0.12.6",
 		"named-logs": "^0.4.1",
 		"prettier": "^3.7.3",
 		"prettier-plugin-svelte": "^3.3.3",
