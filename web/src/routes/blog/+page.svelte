@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils'
-	import * as config from '$lib/config'
+	import {formatDate} from '$lib/utils';
 
-	let { data } = $props()
+	let {data} = $props();
 </script>
 
 <svelte:head>
-	<title>{config.title}</title>
+	<title>Blog</title>
 </svelte:head>
 
 <section>

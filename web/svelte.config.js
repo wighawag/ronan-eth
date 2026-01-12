@@ -1,16 +1,18 @@
 import adapter from '@sveltejs/adapter-static';
-import { execSync } from 'node:child_process';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import { mdsvex } from 'mdsvex';
+import {execSync} from 'node:child_process';
+import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
+import {mdsvex} from 'mdsvex';
 
 let VERSION = `timestamp_${Date.now()}`;
 try {
-	VERSION = execSync('git rev-parse --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+	VERSION = execSync('git rev-parse --short HEAD', {
+		stdio: ['ignore', 'pipe', 'ignore'],
+	})
 		.toString()
 		.trim();
 	try {
 		// This command returns empty string if no changes
-		const output = execSync('git status --porcelain', { encoding: 'utf8' });
+		const output = execSync('git status --porcelain', {encoding: 'utf8'});
 		if (output.trim().length > 0) {
 			VERSION += '-dirty';
 			console.warn(`[!] repo has some uncommited changes...`);
@@ -30,22 +32,22 @@ const config = {
 	preprocess: [
 		vitePreprocess(),
 		mdsvex({
-			extensions: ['.svx', '.md']
-		})
+			extensions: ['.svx', '.md'],
+		}),
 	],
 	kit: {
-		version: { name: VERSION },
-		adapter: adapter({ assets: 'build', pages: 'build', strict: false }),
+		version: {name: VERSION},
+		adapter: adapter({assets: 'build', pages: 'build', strict: false}),
 		serviceWorker: {
 			// we handle it ourselves here : src/service-worker-handler.ts
-			register: false
+			register: false,
 		},
 		paths: {
 			// this is to make it work on ipfs (on an unknown path)
-			relative: true
-		}
+			relative: true,
+		},
 	},
-	extensions: ['.svelte', '.svx', '.md']
+	extensions: ['.svelte', '.svx', '.md'],
 };
 
 export default config;
