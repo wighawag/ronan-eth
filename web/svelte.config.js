@@ -39,7 +39,12 @@ const config = {
 	],
 	kit: {
 		version: {name: VERSION},
-		adapter: adapter({assets: 'build', pages: 'build', strict: false}),
+		adapter: adapter({
+			assets: 'build',
+			pages: 'build',
+			fallback: '404.html', // SPA fallback - serves as 404 page on IPFS/static hosts
+			strict: false,
+		}),
 		prerender: {
 			// imported blog posts contain in-page anchors whose heading ids are
 			// not auto-generated (no slug plugin yet); don't fail the build on them.
@@ -52,6 +57,9 @@ const config = {
 		paths: {
 			// this is to make it work on ipfs (on an unknown path)
 			relative: true,
+		},
+		output: {
+			bundleStrategy: 'single', // less files, better for some ipfs gateways
 		},
 	},
 	extensions: ['.svelte', '.svx', '.md'],
