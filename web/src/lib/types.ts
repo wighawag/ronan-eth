@@ -1,10 +1,13 @@
-export type Categories = 'release' | 'updates';
-
 export type Post = {
 	title: string;
 	slug: string;
-	description: string;
 	date: string;
-	categories: Categories[];
-	published: boolean;
+	image?: string;
+	titleImage?: boolean;
+	mediumLink?: string;
+	video?: string;
+	caption?: string;
+	captionLabel?: string;
+	captionLink?: string;
+	published?: boolean;
 };

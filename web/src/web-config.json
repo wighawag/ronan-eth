@@ -1,10 +1,10 @@
 {
-	"name": "Template Website",
-	"title": "Template Website",
-	"description": "A template to build website",
-	"canonicalURL": "https://localhost",
-	"ENSName": null,
-	"themeColor": "#000000",
+	"name": "Ronan Sandford (ronan.eth)",
+	"title": "Ronan Sandford's Personal Website",
+	"description": "Ronan Sandford's portfolio, Crypto Native Games, Web3 Tools and Creative Projects",
+	"canonicalURL": "https://ronan.eth.limo",
+	"ENSName": "ronan.eth",
+	"themeColor": "#100f11",
 	"appleStatusBarStyle": "black-translucent",
 	"icon": "static/icon.png",
 	"maskableIcons": [

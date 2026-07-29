@@ -40,6 +40,11 @@ const config = {
 	kit: {
 		version: {name: VERSION},
 		adapter: adapter({assets: 'build', pages: 'build', strict: false}),
+		prerender: {
+			// imported blog posts contain in-page anchors whose heading ids are
+			// not auto-generated (no slug plugin yet); don't fail the build on them.
+			handleMissingId: 'warn',
+		},
 		serviceWorker: {
 			// we handle it ourselves here : src/service-worker-handler.ts
 			register: false,

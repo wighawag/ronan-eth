@@ -3,17 +3,17 @@
 @plugin '@tailwindcss/typography';
 
 /* @tailwindcss/typography 0.5.20 (with Tailwind v4) drops the standard
-   max-width/height rule for .prose img, so inline markdown images render
-   at their natural width and escape the .prose container.
-   Restore the missing constraint here. */
+	 max-width/height rule for .prose img, so inline markdown images render
+	 at their natural width and escape the .prose container.
+	 Restore the missing constraint here. */
 .prose img {
 	max-width: 100%;
 	height: auto;
 }
 
 /* VitePress-style custom containers (::: info [Title], tip, warning, danger).
-   These styles are intentionally layered OUTSIDE @layer base so they win
-   over `@tailwindcss/typography`'s .prose child resets. */
+	 These styles are intentionally layered OUTSIDE @layer base so they win
+	 over `@tailwindcss/typography`'s .prose child resets. */
 .custom-block {
 	margin: 1.25rem 0;
 	padding: 0.1rem 1rem;
@@ -44,4 +44,22 @@
 .custom-block.danger {
 	border-color: #f87171; /* red-400 */
 	background: rgba(248, 113, 113, 0.10);
+}
+
+@layer base {
+	html {
+		/* dark blueish-grey base, softer than pure black */
+		background-color: theme(--color-gray-900);
+		color: rgba(255, 255, 245, 0.85);
+	}
+
+	body {
+		min-height: 100dvh;
+		background-color: theme(--color-gray-900);
+	}
+}
+
+/* yellow accent used across the site */
+:root {
+	--accent: theme(--color-yellow-300);
 }
