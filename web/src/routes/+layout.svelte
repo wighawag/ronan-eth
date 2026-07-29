@@ -3,9 +3,12 @@
 	import VersionAndInstallNotfications from '$lib/core/service-worker/VersionAndInstallNotfications.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import MailingList from '$lib/components/MailingList.svelte';
+	import NavigationProgress from '$lib/components/NavigationProgress.svelte';
 	import '../app.css';
 	let {children} = $props();
 </script>
+
+<NavigationProgress />
 
 <div class="flex min-h-dvh flex-col bg-black text-gray-100">
 	<main class="flex-1 bg-black">
