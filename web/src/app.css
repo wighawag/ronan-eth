@@ -10,3 +10,38 @@
 	max-width: 100%;
 	height: auto;
 }
+
+/* VitePress-style custom containers (::: info [Title], tip, warning, danger).
+   These styles are intentionally layered OUTSIDE @layer base so they win
+   over `@tailwindcss/typography`'s .prose child resets. */
+.custom-block {
+	margin: 1.25rem 0;
+	padding: 0.1rem 1rem;
+	border-left: 0.25rem solid;
+	border-radius: 0.125rem;
+	color: rgba(255, 255, 245, 0.85);
+	font-size: 0.95em;
+}
+.custom-block > .custom-block-title {
+	font-weight: 600;
+	margin: 0.6rem 0 0.4rem;
+	font-size: 0.85em;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+.custom-block.info {
+	border-color: #38bdf8; /* sky-400 */
+	background: rgba(56, 189, 248, 0.08);
+}
+.custom-block.tip {
+	border-color: #4ade80; /* green-400 */
+	background: rgba(74, 222, 128, 0.08);
+}
+.custom-block.warning {
+	border-color: #fbbf24; /* amber-400 */
+	background: rgba(251, 191, 36, 0.10);
+}
+.custom-block.danger {
+	border-color: #f87171; /* red-400 */
+	background: rgba(248, 113, 113, 0.10);
+}

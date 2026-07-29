@@ -2,6 +2,7 @@ import adapter from '@sveltejs/adapter-static';
 import {execSync} from 'node:child_process';
 import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
 import {mdsvex} from 'mdsvex';
+import vitepressContainers from './src/lib/markdown/vitepressContainers.js';
 
 let VERSION = `timestamp_${Date.now()}`;
 try {
@@ -33,6 +34,7 @@ const config = {
 		vitePreprocess(),
 		mdsvex({
 			extensions: ['.svx', '.md'],
+			remarkPlugins: [vitepressContainers],
 		}),
 	],
 	kit: {
