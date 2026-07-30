@@ -1,6 +1,7 @@
 ---
 title: State Channels and Interactivity limitations
 date: 2018-08-09
+description: 'State channels are sold as instant and fee-less, but conflict resolution still runs at blockchain speed. Walking through a two-player card game to show why that worst case makes real-time games impossible with state channels alone.'
 mediumLink: https://medium.com/@wighawag/state-channels-and-interactivity-limitations-2872912f9d73
 image: /images/blog/state_chans.png
 # titleImage: false

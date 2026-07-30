@@ -1,6 +1,7 @@
 ---
 title: 'Natural Composability in Autonomous Worlds'
 date: 2023-10-31
+description: 'A definition of Autonomous Worlds, and how worlds built on unchanging rules gain what we call Natural Composability: the ability to be extended in ways nobody designed for, permissionlessly, without ever touching the rules themselves.'
 image: /images/blog/natural-composability.png
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Ethereum, The Concept of Gas and its Dangers
 date: 2020-02-28
+description: 'How gas really behaves when a contract calls another contract, and why almost every smart contract account and meta-transaction implementation is vulnerable to malicious relayers. A close cousin of the infamous call depth attack, made easier by try/catch in Solidity 0.6.'
 mediumLink: https://medium.com/@wighawag/ethereum-the-concept-of-gas-and-its-dangers-28d0eb809bb2
 image: /images/blog/gas-1000.jpg
 # image: Sacred_Chao_2.jpg

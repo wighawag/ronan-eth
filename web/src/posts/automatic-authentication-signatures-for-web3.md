@@ -1,6 +1,7 @@
 ---
 title: Automatic Authentication Signatures For Web3
 date: 2019-01-15
+description: 'A proposal letting web3 wallets produce authentication signatures on demand, with no confirmation pop-up. If the verifier injects unforgeable data into the message, the user has nothing to verify, so sign-in can be seamless without sacrificing security.'
 mediumLink: https://medium.com/@wighawag/automatic-authentication-signatures-for-web3-dcbcbc64d6b5
 image: /images/blog/automatic-signatures.gif
 ---

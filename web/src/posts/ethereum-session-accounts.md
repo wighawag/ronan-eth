@@ -1,6 +1,7 @@
 ---
 title: Ethereum Session Accounts
 date: 2017-10-03
+description: 'How we removed nearly every transaction confirmation pop-up from a fully on-chain game by delegating moves to a short-lived, client-generated session account, pre-funded for its own gas and refunded at the end.'
 mediumLink: https://medium.com/@wighawag/ethereum-session-accounts-fc61fb930dac
 image: /images/blog/session-accounts.png
 titleImage: false

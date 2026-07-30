@@ -2,7 +2,7 @@
 	import Notifications from '$lib/core/notifications/Notifications.svelte';
 	import VersionAndInstallNotfications from '$lib/core/service-worker/VersionAndInstallNotfications.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import MailingList from '$lib/components/MailingList.svelte';
+	import RssCallToAction from '$lib/components/RssCallToAction.svelte';
 	import NavigationProgress from '$lib/components/NavigationProgress.svelte';
 	import '../app.css';
 	let {children} = $props();
@@ -14,7 +14,7 @@
 	<main class="flex-1 bg-black">
 		{@render children()}
 	</main>
-	<MailingList />
+	<RssCallToAction />
 	<Footer />
 </div>
 

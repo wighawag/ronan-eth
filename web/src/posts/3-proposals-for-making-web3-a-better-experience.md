@@ -1,6 +1,7 @@
 ---
 title: 3 Proposals For Making Web3 A Better Experience
 date: 2018-10-12
+description: 'Three proposals to cut the authorization fatigue that plagues web3 wallets: automated origin checks, non-interactive decryption and non-interactive signatures, plus an EIP-712 extension for messages that carry little risk for the user.'
 mediumLink: https://medium.com/@wighawag/3-proposals-for-making-web3-a-better-experience-974f97765700
 image: /images/blog/origin-encryption.png
 titleImage: false

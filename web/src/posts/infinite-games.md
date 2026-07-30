@@ -1,6 +1,7 @@
 ---
 title: Infinite Games
 date: 2022-08-19
+description: 'On games that run and evolve independently of their creator. Why Infinite Games are more than on-chain games, how they relate to autonomous worlds, and what permission-less, persistent systems mean for game design.'
 mediumLink: https://medium.com/@wighawag/infinite-games-1aa679e07834
 image: /images/blog/conquest-render.png
 ---
