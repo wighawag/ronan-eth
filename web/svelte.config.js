@@ -54,7 +54,10 @@ const config = {
 			relative: true,
 		},
 		output: {
-			bundleStrategy: 'single', // less files, better for some ipfs gateways
+			bundleStrategy: 'split', // code-split per route so the initial
+			// bundle is small; a single large file stalls under slow /
+			// throttled connections (and 'single' is not required for IPFS
+			// since paths.relative is already true).
 		},
 	},
 	extensions: ['.svelte', '.svx', '.md'],
