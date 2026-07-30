@@ -45,7 +45,8 @@ const CLOSE_RE = /^:::$/;
  */
 function nodeText(node) {
 	if (!node) return '';
-	if (node.type === 'text' || node.type === 'inlineCode') return node.value || '';
+	if (node.type === 'text' || node.type === 'inlineCode')
+		return node.value || '';
 	if (node.type === 'code') return node.value || '';
 	if (Array.isArray(node.children)) return node.children.map(nodeText).join('');
 	if (typeof node.value === 'string') return node.value;

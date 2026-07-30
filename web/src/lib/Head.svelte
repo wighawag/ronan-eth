@@ -72,6 +72,14 @@
 	/><!-- 180×180 -->
 	<link rel="manifest" href={url('/pwa/manifest.webmanifest')} />
 
+	<!-- feed autodiscovery: how readers and browser extensions find the RSS -->
+	<link
+		rel="alternate"
+		type="application/rss+xml"
+		title="{name} - Blog"
+		href={url('/feed.xml')}
+	/>
+
 	<!-- extra info -->
 	<meta name="theme-color" content={themeColor} />
 	<meta name="mobile-web-app-capable" content="yes" />
