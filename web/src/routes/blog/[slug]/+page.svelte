@@ -49,7 +49,14 @@
 							<track default kind="captions" srclang="en" />
 						</video>
 					{:else if meta.image}
-						<img src={meta.image} class="max-w-prose" alt="Banner" />
+						<img
+							src={meta.image}
+							class="max-w-prose"
+							alt="Banner"
+							width={data.imageWidth}
+							height={data.imageHeight}
+							data-load="loading"
+						/>
 						{#if meta.caption}
 							<p class="-mt-6 text-sm">
 								{meta.captionLabel ? meta.captionLabel + ': ' : ''}<a

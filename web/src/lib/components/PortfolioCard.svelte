@@ -20,7 +20,12 @@
 >
 	<div class="flex-shrink-0">
 		<a href={url} target={external ? '_blank' : undefined} rel="noreferrer">
-			<img class="h-48 w-full object-cover" {src} alt={name} />
+			<img
+				class="h-48 w-full object-cover"
+				{src}
+				alt={name}
+				data-load="loading"
+			/>
 		</a>
 	</div>
 	<div class="flex flex-1 flex-col justify-between bg-black p-6">

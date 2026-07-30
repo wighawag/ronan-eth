@@ -11,6 +11,47 @@
 	height: auto;
 }
 
+/* Image loading-state shimmer.
+	 `data-load="loading"` is written into the HTML at build/render time
+	 (rehypeImages plugin for markdown images; directly on key template images),
+	 and markdown images additionally get intrinsic width/height at build time,
+	 so the browser reserves a box for the shimmer to fill.
+
+	 `data-img-state` is set by the inline script in app.html the moment an
+	 image finishes (loaded/error). It uses a SEPARATE attribute from `data-load`
+	 (which Svelte manages) so hydration can't clobber it, and because that
+	 script runs at end-of-body (before the bundle hydrates) the shimmer is
+	 cleared promptly even on slow connections. */
+img[data-load='loading']:not([data-img-state]) {
+	background-color: rgb(31 31 31);
+	background-image: linear-gradient(
+		100deg,
+		rgb(31 31 31) 30%,
+		rgb(48 48 48) 50%,
+		rgb(31 31 31) 70%
+	);
+	background-size: 200% 100%;
+	animation: img-shimmer 1.3s ease-in-out infinite;
+}
+img[data-img-state='error'] {
+	background-color: rgb(24 24 24);
+	background-image: none;
+	animation: none;
+}
+@keyframes img-shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	img[data-load='loading']:not([data-img-state]) {
+		animation: none;
+	}
+}
+
 /* VitePress-style custom containers (::: info [Title], tip, warning, danger).
 	 These styles are intentionally layered OUTSIDE @layer base so they win
 	 over `@tailwindcss/typography`'s .prose child resets. */

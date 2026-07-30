@@ -3,6 +3,7 @@ import {execSync} from 'node:child_process';
 import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
 import {mdsvex} from 'mdsvex';
 import vitepressContainers from './src/lib/markdown/vitepressContainers.js';
+import {rehypeImages} from './src/lib/markdown/rehypeImages.js';
 
 let VERSION = `timestamp_${Date.now()}`;
 try {
@@ -35,6 +36,7 @@ const config = {
 		mdsvex({
 			extensions: ['.svx', '.md'],
 			remarkPlugins: [vitepressContainers],
+			rehypePlugins: [rehypeImages],
 		}),
 	],
 	kit: {

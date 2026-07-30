@@ -51,6 +51,7 @@
 										class="h-48 w-full object-cover"
 										src={post.image}
 										alt={post.title}
+										data-load="loading"
 									/>
 								</picture>
 							{:else}
@@ -58,6 +59,7 @@
 									class="h-48 w-full object-cover"
 									src={post.image}
 									alt={post.title}
+									data-load="loading"
 								/>
 							{/if}
 						</div>

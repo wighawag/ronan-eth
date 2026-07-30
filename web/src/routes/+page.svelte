@@ -12,6 +12,7 @@
 				class="h-full w-full object-cover"
 				src="/images/header-background.jpeg"
 				alt=""
+				data-load="loading"
 			/>
 			<div
 				class="absolute inset-0 bg-gray-800 mix-blend-multiply"

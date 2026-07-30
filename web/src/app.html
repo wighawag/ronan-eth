@@ -49,5 +49,51 @@
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
+
+		<!-- Image loading-state tracking.
+			 Runs inline at end-of-body so it executes right after the prerendered
+			 HTML is parsed — BEFORE images load and BEFORE the JS bundle hydrates.
+			 This avoids the slow-connection race where the bundle downloads slowly
+			 and a JS-only "loaded" flag arrives after the image is already shown.
+
+			 `data-load` is the static, Svelte-managed marker written into the HTML
+			 at build/render time ("loading"). JS only ever sets a SEPARATE
+			 `data-img-state` attribute (loaded/error), which Svelte never touches,
+			 so hydration can't clobber it. The CSS keys the shimmer off
+			 `data-load="loading"` without `data-img-state`. -->
+		<script>
+			(function () {
+				var STATE = 'data-img-state';
+				function set(img, s) { img.setAttribute(STATE, s); }
+				var wired = new WeakSet();
+				function mark(img) {
+					if (img.hasAttribute(STATE)) return; // already resolved
+					if (img.complete) {
+						set(img, img.naturalWidth > 0 ? 'loaded' : 'error');
+						return;
+					}
+					if (wired.has(img)) return;
+					wired.add(img);
+					img.addEventListener('load', function () { set(img, 'loaded'); }, {once: true});
+					img.addEventListener('error', function () { set(img, 'error'); }, {once: true});
+				}
+				function scan(root) {
+					var imgs = root.querySelectorAll('img');
+					for (var i = 0; i < imgs.length; i++) mark(imgs[i]);
+				}
+				scan(document);
+				new MutationObserver(function (mutations) {
+					for (var i = 0; i < mutations.length; i++) {
+						var added = mutations[i].addedNodes;
+						for (var j = 0; j < added.length; j++) {
+							var n = added[j];
+							if (n.nodeType !== 1) continue;
+							if (n.tagName === 'IMG') mark(n);
+							else if (n.querySelector) scan(n);
+						}
+					}
+				}).observe(document.documentElement, {childList: true, subtree: true});
+			})();
+		</script>
 	</body>
 </html>
