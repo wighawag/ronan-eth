@@ -58,7 +58,7 @@
 	// Detect clicks on <a> that will navigate this tab away from the app.
 	function isExternalSameTabLink(
 		a: HTMLAnchorElement,
-		event: MouseEvent
+		event: MouseEvent,
 	): boolean {
 		if (event.defaultPrevented) return false;
 		// only plain left-clicks (no new-tab modifiers)
@@ -122,7 +122,7 @@
 	});
 </script>
 
-<svelte:window onclick={onclick} />
+<svelte:window {onclick} />
 
 {#if phase !== 'idle'}
 	<div class="nav-progress" aria-hidden="true">

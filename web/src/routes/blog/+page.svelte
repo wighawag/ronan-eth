@@ -19,7 +19,9 @@
 	]}
 />
 
-<div class="relative bg-gray-950 px-4 pt-8 pb-20 sm:px-6 lg:px-8 lg:pt-12 lg:pb-28">
+<div
+	class="relative bg-gray-950 px-4 pt-8 pb-20 sm:px-6 lg:px-8 lg:pt-12 lg:pb-28"
+>
 	<div class="absolute inset-0">
 		<div class="h-1/3 bg-black sm:h-2/3"></div>
 	</div>

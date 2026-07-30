@@ -136,7 +136,8 @@ export const list = [
 		id: 'blue-coati',
 		name: 'Blue Coati',
 		url: 'https://showcase.ethglobal.com/hackfs/blue-coati',
-		title: 'Blue Coati, predication market based curation system using off-chain betting',
+		title:
+			'Blue Coati, predication market based curation system using off-chain betting',
 		description:
 			'Blue Coati is a prediction market based curation system using offchain betting. A decentralised discussion platform is implemented as demo but is just one of the many use cases for it.',
 		sourcecode: 'https://github.com/lichen-lab-ltd/Blue-Coati',
@@ -146,7 +147,8 @@ export const list = [
 		name: 'Github repositories',
 		url: 'https://github.com/wighawag',
 		title: 'Always working on new stuff!',
-		description: 'If you want to get updates, Subscribe to my mailing list, down below.',
+		description:
+			'If you want to get updates, Subscribe to my mailing list, down below.',
 		sourcecode: 'https://github.com/wighawag',
 	},
 ];

@@ -7,7 +7,9 @@
 	let {data} = $props();
 
 	const meta = $derived(data.meta);
-	const showTitleImage = $derived(typeof meta.titleImage === 'undefined' || meta.titleImage);
+	const showTitleImage = $derived(
+		typeof meta.titleImage === 'undefined' || meta.titleImage,
+	);
 </script>
 
 <Head type="article" title={meta.title} image={meta.image} />
@@ -24,7 +26,7 @@
 	<div class="relative overflow-hidden bg-gray-900 py-16">
 		<div class="relative px-4 sm:px-6 lg:px-8">
 			<div
-				class="prose prose-invert mx-auto max-w-3xl text-lg"
+				class="mx-auto prose max-w-3xl text-lg prose-invert"
 				style="color:rgba(255, 255, 245, 0.76);"
 			>
 				<h1
@@ -38,7 +40,7 @@
 			</div>
 
 			<div
-				class="prose prose-invert prose-lg mt-6 mx-auto max-w-3xl prose-a:text-yellow-300 prose-img:rounded-lg"
+				class="mx-auto prose prose-lg mt-6 max-w-3xl prose-invert prose-a:text-yellow-300 prose-img:rounded-lg"
 				style="color:rgba(255, 255, 245, 0.76);"
 			>
 				{#if showTitleImage}

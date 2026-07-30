@@ -31,9 +31,7 @@
 				Portfolio
 			</h2>
 		</div>
-		<div
-			class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3"
-		>
+		<div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
 			{#each list as elem}
 				<PortfolioCard {...elem} />
 			{/each}

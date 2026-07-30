@@ -12,4 +12,4 @@ export const load: PageLoad = async ({params}) => {
 	} catch (e) {
 		error(404, `Could not find ${params.slug}`);
 	}
-}
+};

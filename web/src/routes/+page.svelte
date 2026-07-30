@@ -18,7 +18,9 @@
 				aria-hidden="true"
 			></div>
 		</div>
-		<div class="relative mx-auto max-w-7xl px-4 pt-12 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+		<div
+			class="relative mx-auto max-w-7xl px-4 pt-12 pb-24 sm:px-6 sm:pb-32 lg:px-8"
+		>
 			<div class="flex items-start space-x-5">
 				<div class="flex-shrink-0">
 					<div class="relative">
@@ -44,10 +46,10 @@
 	</div>
 
 	<!-- Overlapping cards -->
-	<section class="relative z-10 mx-auto -mt-32 max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
-		<div
-			class="grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0"
-		>
+	<section
+		class="relative z-10 mx-auto -mt-32 max-w-7xl px-4 pb-8 sm:px-6 lg:px-8"
+	>
+		<div class="grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0">
 			<div class="flex flex-col rounded-2xl bg-black shadow-xl">
 				<div class="relative flex-1 px-6 pt-16 pb-8 md:px-8">
 					<div
@@ -100,14 +102,17 @@
 							href="https://ethereum.org"
 							target="_blank"
 							rel="noreferrer">ethereum</a
-						> ecosystem, including
+						>
+						ecosystem, including
 						<a
 							class="text-yellow-300 underline"
-							href="https://github.com/wighawag/hardhat-deploy">hardhat-deploy</a
+							href="https://github.com/wighawag/hardhat-deploy"
+							>hardhat-deploy</a
 						>
 						and
-						<a class="text-yellow-300 underline" href="https://jolly-roger.eth.limo"
-							>jolly-roger</a
+						<a
+							class="text-yellow-300 underline"
+							href="https://jolly-roger.eth.limo">jolly-roger</a
 						>
 					</p>
 				</div>
@@ -126,13 +131,16 @@
 					</div>
 					<h3 class="text-xl font-medium text-gray-100">Creative Tinkerer</h3>
 					<p class="mt-4 text-base text-gray-400">
-						I like to tinker with technology in general and have been delving into
-						generative art and fully on-chain NFTs with
-						<a class="text-yellow-300 underline" href="https://mandalas.eth.limo"
-							>Mandalas</a
+						I like to tinker with technology in general and have been delving
+						into generative art and fully on-chain NFTs with
+						<a
+							class="text-yellow-300 underline"
+							href="https://mandalas.eth.limo">Mandalas</a
 						>
 						and
-						<a class="text-yellow-300 underline" href="https://bleeps.art">Bleeps</a>
+						<a class="text-yellow-300 underline" href="https://bleeps.art"
+							>Bleeps</a
+						>
 					</p>
 				</div>
 			</div>
@@ -141,7 +149,9 @@
 </div>
 
 <div class="bg-black">
-	<div class="mx-auto max-w-7xl px-4 pt-4 pb-12 text-center sm:px-6 lg:px-8 lg:pb-16">
+	<div
+		class="mx-auto max-w-7xl px-4 pt-4 pb-12 text-center sm:px-6 lg:px-8 lg:pb-16"
+	>
 		<div class="mt-8 flex flex-wrap justify-center gap-3">
 			<a
 				href="blog/"
