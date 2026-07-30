@@ -1,119 +1,106 @@
 <script lang="ts">
 	import {navigating} from '$app/state';
+	import {onMount} from 'svelte';
 
-	// `navigating` is never literally `null` in `$app/state`: when idle it is an
-	// object whose `to`/`from`/`type` are all `null`. An in-flight page navigation
-	// is therefore signalled by `navigating.to` being set.
-	// We ignore `leave`/`unload` navigations (leaving the app) since those have
-	// `to === null`, and the browser handles their own loading indicator.
-	let isNavigating = $derived(!!navigating.to);
+	// Owns every navigation indicator in the app:
+	//   - in-app (SPA) navigation .... bar + spinner, while still on the old URL
+	//   - external same-tab links .... indeterminate bar + spinner, until unload
+	//   - the pre-JS bar in app.html . retired on mount (see onMount below)
+	// Nothing else in the app needs to know about navigation feedback.
 
-	// Avoid flashing the bar on instant navigations: only show it once a
-	// navigation has been in flight for a little while.
-	const SHOW_DELAY = 150; // ms before the bar appears
+	const SHOW_DELAY = 150; // ms in flight before the indicator appears
 	const FINISH_MS = 320; // ms for the complete + fade-out animation
-
-	// SvelteKit can't tell us about cross-origin navigations (they are not SPA
-	// navigations), so for external same-tab link clicks we show an
-	// indeterminate indicator and rely on the browser unloading this document.
-	// If the click does NOT actually unload the page (e.g. the server returns a
-	// download, or something prevented default), this safety timeout hides the
-	// indicator so it never spins forever.
+	const FADE_MS = 400; // ms safety for the pre-JS bar fade-out
+	// Cross-origin navigations give us no completion event (the document
+	// unloads instead). If the click somehow does not unload the page, this
+	// bounds how long the indicator can linger.
 	const EXTERNAL_SAFETY_MS = 10_000;
 
 	type Phase = 'idle' | 'loading' | 'finishing';
 	let phase = $state<Phase>('idle');
-	// true when the current indicator was triggered by an external link click
-	// (no completion event will arrive — the document unloads instead).
+	// The current run has no completion event to wait for (external link).
 	let external = $state(false);
 
 	let showTimer: ReturnType<typeof setTimeout> | undefined;
 	let finishTimer: ReturnType<typeof setTimeout> | undefined;
 	let safetyTimer: ReturnType<typeof setTimeout> | undefined;
 
-	// --- Internal (SvelteKit) navigation -------------------------------------
-	// The effect only depends on `isNavigating`; the cleanup reads `phase` but
-	// cleanup functions are not tracked, so `phase` mutations never re-run this.
+	// `navigating` is never literally null in `$app/state`: when idle it is an
+	// object whose `to`/`from`/`type` are all null. So an in-flight navigation
+	// is signalled by `to` being set. Leaving the app has `to === null`, which
+	// correctly excludes it here (the browser shows its own indicator).
+	const isNavigating = $derived(!!navigating.to);
+
+	// Only depends on `isNavigating`. The cleanup reads `phase`, but cleanup
+	// functions are not tracked, so `phase` writes never re-run this.
 	$effect(() => {
 		const loading = isNavigating;
 		if (loading) {
-			// An in-app navigation started: cancel any pending external safety
-			// reset and take over the indicator.
-			clearTimeout(safetyTimer);
+			clearTimeout(safetyTimer); // an in-app nav supersedes an external one
 			external = false;
 			showTimer = setTimeout(() => (phase = 'loading'), SHOW_DELAY);
 		}
 		return () => {
 			clearTimeout(showTimer);
 			if (loading && phase === 'loading') {
-				// Navigation completed while the bar was visible: jump to 100%
-				// and fade out, then reset to idle.
+				// Completed while visible: run to 100% and fade out.
 				phase = 'finishing';
 				finishTimer = setTimeout(() => (phase = 'idle'), FINISH_MS);
 			}
 		};
 	});
 
-	// --- External (cross-origin) same-tab navigation -------------------------
-	// Detect clicks on <a> that will navigate this tab away from the app.
-	function isExternalSameTabLink(
-		a: HTMLAnchorElement,
-		event: MouseEvent,
-	): boolean {
-		if (event.defaultPrevented) return false;
-		// only plain left-clicks (no new-tab modifiers)
-		if (
-			event.button !== 0 ||
-			event.metaKey ||
-			event.ctrlKey ||
-			event.shiftKey ||
-			event.altKey
-		) {
+	/** Will this click navigate THIS tab to another origin? */
+	function isExternalSameTabLink(a: HTMLAnchorElement, e: MouseEvent) {
+		if (e.defaultPrevented) return false;
+		// plain left-click only: modifiers open a new tab, so we stay put
+		if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
 			return false;
 		}
 		const href = a.getAttribute('href');
 		if (!href) return false;
-		// skip non-http(s) schemes
 		if (/^(mailto:|tel:|sms:|javascript:|data:|#)/i.test(href)) return false;
-		// skip downloads
 		if (a.hasAttribute('download')) return false;
-		// skip explicit new-tab / new-window targets
 		const target = a.getAttribute('target');
 		if (target && target.toLowerCase() !== '_self') return false;
-		// only cross-origin links are "external"; same-origin goes via SvelteKit
-		let url: URL;
 		try {
-			url = new URL(href, location.href);
+			// same-origin links are handled by SvelteKit, and show up via
+			// `navigating` above rather than here
+			return new URL(href, location.href).origin !== location.origin;
 		} catch {
 			return false;
 		}
-		return url.origin !== location.origin;
 	}
 
 	function onclick(event: MouseEvent) {
 		const anchor = event
 			.composedPath()
 			.find((n): n is HTMLAnchorElement => n instanceof HTMLAnchorElement);
-		if (!anchor) return;
-		if (!isExternalSameTabLink(anchor, event)) return;
+		if (!anchor || !isExternalSameTabLink(anchor, event)) return;
 
-		// External, same-tab navigation: show indeterminate indicator. The
-		// browser will unload this document; CSS keeps the bar/spinner painted
-		// until the new page replaces us.
+		// The browser will unload this document; CSS animations keep running
+		// during teardown, so the indicator stays painted until the new page
+		// paints over it.
 		clearTimeout(showTimer);
 		clearTimeout(finishTimer);
 		external = true;
 		phase = 'loading';
 		safetyTimer = setTimeout(() => {
-			// Still alive after a while — the click didn't unload the page
-			// (download / prevented / etc.). Reset so we don't spin forever.
 			phase = 'idle';
 			external = false;
 		}, EXTERNAL_SAFETY_MS);
 	}
 
-	// Tidy up any pending timers if the component is destroyed mid-navigation.
-	$effect(() => {
+	onMount(() => {
+		// Retire the pre-JS bar from app.html: from now on this component is
+		// the only thing that shows navigation feedback.
+		const preJsBar = document.getElementById('app-loader');
+		if (preJsBar) {
+			preJsBar.classList.add('hide');
+			const remove = () => preJsBar.remove();
+			preJsBar.addEventListener('transitionend', remove, {once: true});
+			setTimeout(remove, FADE_MS); // in case transitionend never fires
+		}
 		return () => {
 			clearTimeout(showTimer);
 			clearTimeout(finishTimer);
@@ -125,20 +112,17 @@
 <svelte:window {onclick} />
 
 {#if phase !== 'idle'}
-	<div class="nav-progress" aria-hidden="true">
-		<div
-			class="nav-progress-bar"
-			class:finishing={phase === 'finishing'}
-			class:indeterminate={external}
-		></div>
-	</div>
-
+	{@const finishing = phase === 'finishing'}
 	<div
-		class="nav-spinner"
-		class:finishing={phase === 'finishing'}
+		class="bar"
+		class:finishing
+		class:indeterminate={external}
 		aria-hidden="true"
 	>
-		<svg viewBox="0 0 24 24" class="nav-spinner-svg">
+		<div class="bar-fill"></div>
+	</div>
+	<div class="spinner" class:finishing aria-hidden="true">
+		<svg viewBox="0 0 24 24">
 			<circle class="track" cx="12" cy="12" r="9" />
 			<circle class="arc" cx="12" cy="12" r="9" />
 		</svg>
@@ -146,41 +130,80 @@
 {/if}
 
 <style>
-	.nav-progress {
+	/* --nav-accent / --nav-bar-height come from the inline :root block in
+	   app.html, so the pre-JS bar and this component always match. Fallbacks
+	   keep this component standalone if that block ever goes away. */
+	.bar {
 		position: fixed;
 		inset: 0 0 auto 0;
-		height: 2px;
+		height: var(--nav-bar-height, 2px);
 		z-index: 9999;
 		pointer-events: none;
-		/* faint track so the bar reads as a progress indicator */
-		background: rgb(250 204 21 / 0.12);
+		background: rgb(var(--nav-accent, 250 204 21) / 0.12);
 	}
 
-	.nav-progress-bar {
+	.bar-fill {
 		height: 100%;
-		background: rgb(250 204 21); /* yellow-400, matches site accent */
-		box-shadow: 0 0 8px rgb(250 204 21 / 0.55);
+		background: rgb(var(--nav-accent, 250 204 21));
+		box-shadow: 0 0 8px rgb(var(--nav-accent, 250 204 21) / 0.55);
 		transform-origin: left;
-		/* Grow quickly then ease off, never quite reaching 100% while loading. */
-		animation: nav-progress-grow 8s cubic-bezier(0.1, 0.55, 0.1, 1) forwards;
+		/* Creep toward, but never reach, 100% while still loading. */
+		animation: grow 8s cubic-bezier(0.1, 0.55, 0.1, 1) forwards;
 		transition:
 			width 0.2s ease-out,
 			opacity 0.3s ease-out;
 	}
 
-	.nav-progress-bar.finishing {
+	.bar.finishing .bar-fill {
 		animation: none;
 		width: 100%;
 		opacity: 0;
 	}
 
-	/* External navigations have no real progress signal: use an indeterminate
-	   shuttle animation instead of the grow curve. */
-	.nav-progress-bar.indeterminate {
-		animation: nav-progress-shuttle 1.1s ease-in-out infinite;
+	/* External navigations expose no progress, so sweep instead of creeping. */
+	.bar.indeterminate .bar-fill {
+		width: 40%;
+		animation: shuttle 1.1s ease-in-out infinite;
 	}
 
-	@keyframes nav-progress-grow {
+	.spinner {
+		position: fixed;
+		top: 14px;
+		right: 16px;
+		z-index: 9999;
+		width: 22px;
+		height: 22px;
+		pointer-events: none;
+		transition: opacity 0.3s ease-out;
+	}
+
+	.spinner.finishing {
+		opacity: 0;
+	}
+
+	.spinner svg {
+		width: 100%;
+		height: 100%;
+		animation: spin 0.7s linear infinite;
+	}
+
+	.spinner circle {
+		fill: none;
+		stroke-width: 3;
+	}
+
+	.spinner .track {
+		stroke: rgb(var(--nav-accent, 250 204 21) / 0.18);
+	}
+
+	/* circumference = 2 * pi * 9 =~ 56.5, so 42/14 is about a 3/4 arc */
+	.spinner .arc {
+		stroke: rgb(var(--nav-accent, 250 204 21));
+		stroke-linecap: round;
+		stroke-dasharray: 42 14;
+	}
+
+	@keyframes grow {
 		0% {
 			width: 0%;
 		}
@@ -201,77 +224,34 @@
 		}
 	}
 
-	@keyframes nav-progress-shuttle {
+	@keyframes shuttle {
 		0% {
-			width: 0%;
-			transform: translateX(0%);
+			transform: translateX(-100%);
 		}
 		50% {
-			width: 40%;
 			transform: translateX(150%);
 		}
 		100% {
-			width: 0%;
-			transform: translateX(300%);
+			transform: translateX(350%);
 		}
 	}
 
-	/* --- Spinner ------------------------------------------------------------- */
-	.nav-spinner {
-		position: fixed;
-		top: 14px;
-		right: 16px;
-		z-index: 9999;
-		width: 22px;
-		height: 22px;
-		pointer-events: none;
-		opacity: 1;
-		transition: opacity 0.3s ease-out;
-	}
-
-	.nav-spinner.finishing {
-		opacity: 0;
-	}
-
-	.nav-spinner-svg {
-		width: 100%;
-		height: 100%;
-		animation: nav-spin 0.7s linear infinite;
-	}
-
-	.nav-spinner-svg .track {
-		fill: none;
-		stroke: rgb(250 204 21 / 0.18);
-		stroke-width: 3;
-	}
-
-	/* circumference = 2 * π * 9 ≈ 56.5; dasharray ~74% arc */
-	.nav-spinner-svg .arc {
-		fill: none;
-		stroke: rgb(250 204 21);
-		stroke-width: 3;
-		stroke-linecap: round;
-		stroke-dasharray: 42 14;
-	}
-
-	@keyframes nav-spin {
+	@keyframes spin {
 		to {
 			transform: rotate(360deg);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.nav-progress-bar {
+		.bar-fill,
+		.bar.indeterminate .bar-fill {
 			animation: none;
 			width: 95%;
 		}
-		.nav-progress-bar.finishing {
+		.bar.finishing .bar-fill {
 			width: 100%;
 		}
-		.nav-progress-bar.indeterminate {
-			width: 50%;
-		}
-		.nav-spinner-svg {
+		.spinner svg {
 			animation-duration: 1.6s;
 		}
 	}
