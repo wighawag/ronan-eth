@@ -248,7 +248,7 @@ It can be implemented either as 3 new CALL\* opcodes or by reserving specific ga
 
 This would allow smart contract wallet and meta-transaction in general to ensure that the user's meta- transaction is given the exact amount of gas specified by the users' signed message without any extra work or opcode pricing dependent logic. As such relayers would only get a reward if they give the right amount of gas for the transaction to succeed.
 
-## 3. Inner Call Out Of Gas Attack
+## 4. Inner Call Out Of Gas Attack
 
 It turns out that the behavior of gas is responsible for yet another issue. Indeed, a gas based attack is also possible on contracts that call other contracts with all gas available (that is 63/64 of all gas available). In other words, while the issue facing meta-transaction mentionned above, is that they cannot ensure easily that the inner call get a specific amount of gas, the attack described below affects any inner call whose failure do not cause the _caller_ to revert.
 
