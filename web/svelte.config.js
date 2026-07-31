@@ -3,8 +3,6 @@ import {execSync} from 'node:child_process';
 import {vitePreprocess} from '@sveltejs/vite-plugin-svelte';
 import {mdsvex} from 'mdsvex';
 import vitepressContainers from './src/lib/markdown/vitepressContainers.js';
-// Pinned to v4: mdsvex 0.12.x runs unified 9 / the old hast, and rehype-slug 5+
-// requires a newer hast. Bumping this past ^4 silently stops generating ids.
 import rehypeSlug from 'rehype-slug';
 
 let VERSION = `timestamp_${Date.now()}`;
