@@ -2,7 +2,7 @@
 	import Head from '$lib/Head.svelte';
 	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 	import PortfolioCard from '$lib/components/PortfolioCard.svelte';
-	import {list} from '$lib/data/portfolio';
+	import {portfolio} from '$lib/data/portfolio';
 
 	const title = 'Portfolio';
 	const description = 'Crypto Native Games, Web3 Tools and Creative Projects';
@@ -30,10 +30,14 @@
 			>
 				Portfolio
 			</h2>
+			<p class="mx-auto mt-3 max-w-2xl text-lg text-gray-400">
+				{description}
+			</p>
 		</div>
+
 		<div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
-			{#each list as elem}
-				<PortfolioCard {...elem} />
+			{#each portfolio as project (project.id)}
+				<PortfolioCard {project} />
 			{/each}
 		</div>
 	</div>

@@ -20,6 +20,18 @@ jobs:
           node-version: "22"
           cache: "pnpm"
 
+      # ------------------------------------------------------------------
+      # Embedded projects come in two flavours (see web/src/lib/data/projects.ts):
+      #   - a LIVE remote embed (`embedUrl`, e.g. dorfl -> GitHub Pages): the
+      #     iframe points straight at the hosted site, so there is NOTHING to
+      #     build here.
+      #   - a COPIED-IN embed (`buildPath`, a sibling checkout): that project's
+      #     build must exist before `pnpm build` so the post-build step can copy
+      #     it into web/build/projects/<id>/_site/. When we add one, clone +
+      #     build it here (and set EMBED_STRICT=1 on the Build step below to fail
+      #     if its build is missing). There are none right now.
+      # ------------------------------------------------------------------
+
       - name: Install dependencies
         run: pnpm install
 

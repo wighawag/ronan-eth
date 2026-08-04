@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Head from '$lib/Head.svelte';
 	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
-	import PortfolioCard from '$lib/components/PortfolioCard.svelte';
+	import LinkCard from '$lib/components/LinkCard.svelte';
 	import {list} from '$lib/data/links';
 
 	const title = 'Links';
@@ -32,8 +32,8 @@
 			</h2>
 		</div>
 		<div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
-			{#each list as elem}
-				<PortfolioCard {...elem} />
+			{#each list as elem (elem.id)}
+				<LinkCard {...elem} />
 			{/each}
 		</div>
 	</div>

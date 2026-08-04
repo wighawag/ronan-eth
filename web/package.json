@@ -30,7 +30,7 @@
 		"prepare": "pnpm generate-pwa-icons-and-tags && svelte-kit sync || echo ''",
 		"generate-pwa-icons-and-tags": "pwag static/icon.png src/web-config.json",
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "vite build && EMBED_BASE=projects node scripts/embed-projects.mjs",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

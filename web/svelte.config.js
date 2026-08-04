@@ -49,6 +49,16 @@ const config = {
 			fallback: '404.html', // SPA fallback - serves as 404 page on IPFS/static hosts
 			strict: false,
 		}),
+		prerender: {
+			// The docked/inline embed project pages iframe `./_site/`, which does
+			// not exist at prerender time (it is copied in by
+			// scripts/embed-projects.mjs after the build). Don't fail the build on
+			// that missing internal link.
+			handleHttpError: ({path, message}) => {
+				if (path.endsWith('/_site/') || path.includes('/_site/')) return;
+				throw new Error(message);
+			},
+		},
 		serviceWorker: {
 			// we handle it ourselves here : src/service-worker-handler.ts
 			register: false,
