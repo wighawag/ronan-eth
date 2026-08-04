@@ -31,12 +31,17 @@ const lead = leadOrder
 	.filter((p): p is Project => Boolean(p));
 const leadIds = new Set(leadOrder);
 
+/** Only visible projects are shown on the grid. Hidden ones (visible: false)
+ * still exist in the manifest and get a /projects/<id>/ page, but are not
+ * displayed on the portfolio page. */
+const visible = projects.filter((p) => p.visible !== false);
+
 /** No-image projects to pin at the FRONT of the no-image bucket (right after
  * the last image card), in this order. */
 const noImageLead = ['clones-with-immutable-args'];
 const noImageLeadIds = new Set(noImageLead);
 
-const remainingAll = projects.filter((p) => !leadIds.has(p.id));
+const remainingAll = visible.filter((p) => !leadIds.has(p.id));
 const remainingImage = remainingAll.filter((p) => p.image);
 const remainingNoImage = remainingAll.filter(
 	(p) => !p.image && !noImageLeadIds.has(p.id),

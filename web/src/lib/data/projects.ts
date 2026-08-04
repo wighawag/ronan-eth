@@ -77,6 +77,9 @@ export interface Project {
 	tags?: string[];
 	/** show prominently at the top of the hub */
 	featured?: boolean;
+	/** when false, the project is in the manifest (and gets a /projects/<id>/ page)
+	 *  but is NOT shown on the portfolio grid. Defaults to true. */
+	visible?: boolean;
 }
 
 export const projects: Project[] = [
@@ -208,6 +211,16 @@ export const projects: Project[] = [
 		tags: ['game'],
 	},
 	{
+		id: 'bomber-world',
+		name: 'bomber.world',
+		title: 'A simultaneous turn-based game of mayhem',
+		description:
+			'A simultaneous turn-based game of mayhem, persistent and permissionless. Players act at the same time in each turn, creating a fast, chaotic and strategic on-chain game.',
+		url: 'https://bomber.world',
+		image: '/images/portfolio/bomber-world-preview.png',
+		tags: ['game', 'onchain'],
+	},
+	{
 		id: 'embed-art',
 		name: 'Embed.art',
 		title: 'Embed Your Art Anywhere',
@@ -217,6 +230,15 @@ export const projects: Project[] = [
 		image: '/images/portfolio/embed-art-preview.png',
 		sourcecode: 'https://github.com/wighawag/embed-art',
 		tags: ['tooling'],
+	},
+	{
+		id: 'blockies-nft',
+		name: 'On-chain Blockies',
+		title: 'Blockies generated on-chain in Solidity',
+		description:
+			'Blockies (the Ethereum identicon pattern) generated entirely on-chain in Solidity, so every Ethereum wallet automatically owns its own blocky as an NFT with no external metadata or image service.',
+		sourcecode: 'https://github.com/wighawag/blockies-nft',
+		tags: ['art', 'onchain'],
 	},
 	{
 		id: 'catacombs',
@@ -445,6 +467,16 @@ export const projects: Project[] = [
 		description:
 			'A collection of Solidity proxy patterns for upgradeable contracts: ERC1967 storage, ERC173 ownership, a Diamond (multi-facet) implementation, and an immutable router that dispatches calls to fixed implementations without a mutable storage slot.',
 		url: 'https://www.npmjs.com/package/solidity-proxy',
+		tags: ['library', 'web3'],
+	},
+	{
+		id: 'eip721-subgraph',
+		name: 'eip721-subgraph',
+		title: 'A subgraph for indexing EIP-721 NFTs',
+		description:
+			'A subgraph for The Graph that indexes EIP-721 (NFT) transfers and ownership, deployable to your own graph-node so an app can query NFT activity without running a full indexer.',
+		url: 'https://www.npmjs.com/package/eip721-subgraph',
+		sourcecode: 'https://github.com/wighawag/eip721-subgraph',
 		tags: ['library', 'web3'],
 	},
 	{
@@ -741,6 +773,153 @@ export const projects: Project[] = [
 		image: '/images/portfolio/pinnace-preview.png',
 		sourcecode: 'https://github.com/wighawag/pinnace',
 		tags: ['tooling', 'web3'],
+	},
+
+	// --- hidden projects: listed in the manifest (and get a /projects/<id>/
+	//     page) but NOT shown on the portfolio grid --------------------------
+	{
+		id: 'erc721-users',
+		name: 'erc721-users',
+		title: 'ERC-721 with user accounts',
+		description: 'An ERC-721 extension that tracks per-token users separately from owners, so apps can grant user-level permissions distinct from token ownership.',
+		sourcecode: 'https://github.com/wighawag/erc721-users',
+		tags: ['library', 'web3'],
+		visible: false,
+	},
+	{
+		id: 'CryptoLife',
+		name: 'CryptoLife',
+		title: 'Conway\'s Game of Life on-chain',
+		description: 'An on-chain implementation of Conway\'s Game of Life, where the cellular automaton evolves on the blockchain.',
+		sourcecode: 'https://github.com/wighawag/CryptoLife',
+		tags: ['game', 'onchain'],
+		visible: false,
+	},
+	{
+		id: 'mystery-box',
+		name: 'mystery-box',
+		title: 'Randomised mystery boxes as NFTs',
+		description: 'A system for creating randomised mystery boxes as NFTs, where the contents are revealed only after opening.',
+		sourcecode: 'https://github.com/wighawag/mystery-box',
+		tags: ['web3', 'onchain'],
+		visible: false,
+	},
+	{
+		id: 'template-on-chain-art',
+		name: 'template-on-chain-art',
+		title: 'Template for fully on-chain generative art',
+		description: 'A template for building fully on-chain generative art projects, with on-chain tokenURI and zero external dependencies.',
+		sourcecode: 'https://github.com/wighawag/template-on-chain-art',
+		tags: ['art', 'onchain'],
+		visible: false,
+	},
+	{
+		id: 'sveltore',
+		name: 'sveltore',
+		title: 'A tiny store utility for Svelte',
+		description: 'A small store utility for Svelte that provides writable and readable stores with extra helpers.',
+		sourcecode: 'https://github.com/wighawag/sveltore',
+		tags: ['library'],
+		visible: false,
+	},
+	{
+		id: 'ethereum-lan-node',
+		name: 'ethereum-lan-node',
+		title: 'Run an Ethereum node on your LAN',
+		description: 'Tooling to run and configure an Ethereum node accessible on your local network, for development and testing.',
+		sourcecode: 'https://github.com/wighawag/ethereum-lan-node',
+		tags: ['tooling', 'web3'],
+		visible: false,
+	},
+	{
+		id: 'dungeoncaster',
+		name: 'dungeoncaster',
+		title: 'On-chain dungeon game',
+		description: 'An on-chain dungeon game where players explore and interact with a dungeon generated on the blockchain.',
+		sourcecode: 'https://github.com/wighawag/dungeoncaster',
+		tags: ['game', 'onchain'],
+		visible: false,
+	},
+	{
+		id: 'erc721-lease',
+		name: 'erc721-lease',
+		title: 'Lease your ERC-721 tokens',
+		description: 'An ERC-721 extension that lets token owners lease their NFTs to other users for a period, granting the lessee user-level access without transferring ownership.',
+		sourcecode: 'https://github.com/wighawag/erc721-lease',
+		tags: ['library', 'web3'],
+		visible: false,
+	},
+	{
+		id: 'universal-forwarder',
+		name: 'universal-forwarder',
+		title: 'A universal forwarder for meta-transactions',
+		description: 'A universal forwarder contract that enables gasless meta-transactions, letting a relayer submit a transaction on behalf of a user who signed the intent.',
+		sourcecode: 'https://github.com/wighawag/universal-forwarder',
+		tags: ['library', 'web3'],
+		visible: false,
+	},
+	{
+		id: 'transfer-gateway',
+		name: 'transfer-gateway',
+		title: 'A gateway for cross-chain token transfers',
+		description: 'A gateway contract for transferring tokens across chains, handling locking and minting on the source and destination.',
+		sourcecode: 'https://github.com/wighawag/transfer-gateway',
+		tags: ['library', 'web3'],
+		visible: false,
+	},
+	{
+		id: 'vitalik-secret',
+		name: 'vitalik-secret',
+		title: 'Secret sharing on Ethereum',
+		description: 'An on-chain secret sharing experiment on Ethereum.',
+		sourcecode: 'https://github.com/wighawag/vitalik-secret',
+		tags: ['web3', 'onchain'],
+		visible: false,
+	},
+	{
+		id: 'js24k-on-chain',
+		name: 'js24k-on-chain',
+		title: 'A 24kB JavaScript game fully on-chain',
+		description: 'A JavaScript game built to fit in 24kB, stored and executed fully on-chain with zero external dependencies.',
+		sourcecode: 'https://github.com/wighawag/js24k-on-chain',
+		tags: ['game', 'onchain'],
+		visible: false,
+	},
+	{
+		id: 'js13k-on-chain',
+		name: 'js13k-on-chain',
+		title: 'A 13kB JavaScript game fully on-chain',
+		description: 'A JavaScript game built to fit in 13kB, stored and executed fully on-chain with zero external dependencies.',
+		sourcecode: 'https://github.com/wighawag/js13k-on-chain',
+		tags: ['game', 'onchain'],
+		visible: false,
+	},
+	{
+		id: 'conquest-boardgame',
+		name: 'conquest-boardgame',
+		title: 'A physical board game adaptation of conquest.eth',
+		description: 'A physical board game adaptation of the on-chain strategy game conquest.eth.',
+		sourcecode: 'https://github.com/wighawag/conquest-boardgame',
+		tags: ['game'],
+		visible: false,
+	},
+	{
+		id: 'the-bleep-machine',
+		name: 'the-bleep-machine',
+		title: 'A machine that plays Bleeps',
+		description: 'A physical machine that plays the on-chain Bleeps sounds, bridging the digital and physical.',
+		sourcecode: 'https://github.com/wighawag/the-bleep-machine',
+		tags: ['art'],
+		visible: false,
+	},
+	{
+		id: 'particle-emitter-editor',
+		name: 'particle-emitter-editor',
+		title: 'A visual editor for particle emitters',
+		description: 'A visual editor for creating and tuning particle emitter configurations, exportable for use in games and animations.',
+		sourcecode: 'https://github.com/wighawag/particle-emitter-editor',
+		tags: ['tooling'],
+		visible: false,
 	},
 ];
 
