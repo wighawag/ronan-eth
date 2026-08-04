@@ -1,4 +1,5 @@
 <script lang="ts">
+	import {onMount} from 'svelte';
 	import {
 		type Project,
 		resolveKind,
@@ -10,7 +11,9 @@
 	let {project}: {project: Project & {image?: string}} = $props();
 
 	const kind = $derived(resolveKind(project));
-	const fullEmbed = $derived(kind === 'embed' && resolveFrame(project) === 'full');
+	const fullEmbed = $derived(
+		kind === 'embed' && resolveFrame(project) === 'full',
+	);
 
 	const href = $derived(
 		kind === 'redirect'
@@ -18,6 +21,15 @@
 			: `../projects/${project.id}/`,
 	);
 	const external = $derived(kind === 'redirect' || fullEmbed);
+
+	// The stretched overlay anchor makes the card navigate without JavaScript.
+	// Once JS is active we disable its pointer events so clicks/drags reach the
+	// plain text beneath (which is freely selectable) and the card's own click
+	// handler takes over navigation. In SSR / no-JS it stays interactive.
+	let overlayInteractive = $state(true);
+	onMount(() => {
+		overlayInteractive = false;
+	});
 
 	function navigate() {
 		if (external) {
@@ -27,9 +39,9 @@
 		}
 	}
 
-	// Click the card to navigate, but NOT when the user is selecting text or
-	// clicked the source link. This keeps text selectable while the whole card
-	// stays clickable.
+	// Click the card to navigate, but NOT when the user just selected text or
+	// clicked the source link. This keeps the text selectable while the whole
+	// card stays clickable (only with JS; without JS the overlay navigates).
 	function onClick(e: MouseEvent) {
 		if ((e.target as HTMLElement).closest('a')) return;
 		const sel = window.getSelection();
@@ -48,17 +60,33 @@
 <div
 	class="group relative flex cursor-pointer flex-col overflow-hidden rounded-lg bg-gray-950 shadow-sm shadow-slate-400 transition-shadow hover:shadow-md hover:shadow-yellow-300/40"
 	role="link"
-	tabindex="0"
+	tabindex={overlayInteractive ? -1 : 0}
 	onclick={onClick}
 	onkeydown={onKeydown}
 >
-	<div class="h-48 flex-shrink-0 overflow-hidden">
+	<!-- Stretched card link: a real anchor covering the whole card so it
+	     navigates natively (no JS) to the project's external site or hub page.
+	     The source link below sits above this on z-10 so it still works on its
+	     own. With JS the overlay's pointer events are disabled so the text
+	     beneath stays selectable and the card click handler handles navigation. -->
+	<a
+		{href}
+		target={external ? '_blank' : undefined}
+		rel={external ? 'noreferrer' : undefined}
+		aria-label={project.name}
+		class="absolute inset-0 z-0"
+		tabindex={overlayInteractive ? 0 : -1}
+		style:pointer-events={overlayInteractive ? 'auto' : 'none'}
+	></a>
+
+	<div class="h-48 shrink-0 overflow-hidden">
 		{#if project.image}
 			<img
 				class="h-48 w-full object-cover"
 				src={project.image}
 				alt={project.name}
 				loading="lazy"
+				draggable="false"
 			/>
 		{:else}
 			<GenericPreview name={project.name} />
