@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Notifications from '$lib/core/notifications/Notifications.svelte';
 	import VersionAndInstallNotfications from '$lib/core/service-worker/VersionAndInstallNotfications.svelte';
+	import {notifications, serviceWorker} from '$lib/core/config';
 	import Footer from '$lib/components/Footer.svelte';
 	import RssCallToAction from '$lib/components/RssCallToAction.svelte';
 	import NavigationProgress from '$lib/components/NavigationProgress.svelte';
@@ -30,6 +31,6 @@
 	</div>
 {/if}
 
-<Notifications />
+<Notifications {notifications} />
 
-<VersionAndInstallNotfications src="" alt="" />
+<VersionAndInstallNotfications {serviceWorker} />
