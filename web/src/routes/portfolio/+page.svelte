@@ -1,4 +1,5 @@
 <script lang="ts">
+	import {page} from '$app/state';
 	import Head from '$lib/Head.svelte';
 	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 	import PortfolioCard from '$lib/components/PortfolioCard.svelte';
@@ -6,6 +7,10 @@
 
 	const title = 'Portfolio';
 	const description = 'Crypto Native Games, Web3 Tools and Creative Projects';
+
+	// ?grid=full packs as many cards per row as the viewport can
+	// fit and drops the max-width cap so the grid spans the full page width.
+	const full = $derived(page.url.searchParams.get('grid') === 'full');
 </script>
 
 <Head {title} {description} />
@@ -23,7 +28,7 @@
 	<div class="absolute inset-0">
 		<div class="h-1/3 bg-gray-900 sm:h-2/3"></div>
 	</div>
-	<div class="relative mx-auto max-w-7xl">
+	<div class="relative mx-auto {full ? 'w-full' : 'max-w-7xl'}">
 		<div class="text-center">
 			<h2
 				class="text-3xl font-extrabold tracking-tight text-gray-100 sm:text-4xl"
@@ -35,9 +40,14 @@
 			</p>
 		</div>
 
-		<div class="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
+		<div
+			class={'mx-auto mt-12 grid gap-5 ' +
+				(full
+					? 'grid-cols-[repeat(auto-fill,minmax(16rem,1fr))]'
+					: 'max-w-lg lg:max-w-none lg:grid-cols-3')}
+		>
 			{#each portfolio as project (project.id)}
-				<PortfolioCard {project} />
+				<PortfolioCard {project} dense={full} />
 			{/each}
 		</div>
 	</div>

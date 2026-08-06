@@ -8,7 +8,10 @@
 	} from '$lib/data/projects';
 	import GenericPreview from './GenericPreview.svelte';
 
-	let {project}: {project: Project & {image?: string}} = $props();
+	let {
+		project,
+		dense = false,
+	}: {project: Project & {image?: string}; dense?: boolean} = $props();
 
 	const kind = $derived(resolveKind(project));
 	const fullEmbed = $derived(
@@ -79,10 +82,10 @@
 		style:pointer-events={overlayInteractive ? 'auto' : 'none'}
 	></a>
 
-	<div class="h-48 shrink-0 overflow-hidden">
+	<div class="shrink-0 overflow-hidden {dense ? 'aspect-2/1' : 'h-48'}">
 		{#if project.image}
 			<img
-				class="h-48 w-full object-cover"
+				class="h-full w-full object-cover"
 				src={project.image}
 				alt={project.name}
 				loading="lazy"
@@ -93,12 +96,30 @@
 		{/if}
 	</div>
 
-	<div class="flex flex-1 flex-col justify-between bg-black p-6">
+	<div
+		class="flex flex-1 flex-col justify-between bg-black {dense
+			? 'p-3'
+			: 'p-6'}"
+	>
 		<div class="flex-1 select-text">
-			<p class="text-xl font-medium text-yellow-300">{project.name}</p>
+			<p
+				class="{dense
+					? 'text-base'
+					: 'text-xl'} font-medium wrap-break-word text-yellow-300"
+			>
+				{project.name}
+			</p>
 			<div class="mt-2 block">
-				<p class="text-xl font-semibold text-gray-100">{project.title}</p>
-				<p class="mt-3 text-base text-gray-300">{project.description}</p>
+				<p
+					class="{dense
+						? 'text-sm'
+						: 'text-xl'} font-semibold wrap-break-word text-gray-100"
+				>
+					{project.title}
+				</p>
+				{#if !dense}
+					<p class="mt-3 text-base text-gray-300">{project.description}</p>
+				{/if}
 			</div>
 		</div>
 		{#if project.sourcecode}
