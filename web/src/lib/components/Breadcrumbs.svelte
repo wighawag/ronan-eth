@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {route} from '$lib/core/config';
+
 	interface Props {
 		path?: {name: string; path: string}[];
 	}
@@ -15,7 +17,10 @@
 				{#if i == 0}
 					<li class="flex">
 						<div class="flex items-center">
-							<a href={elem.path} class="text-gray-600 hover:text-gray-500">
+							<a
+								href={route(elem.path)}
+								class="text-gray-600 hover:text-gray-500"
+							>
 								<svg
 									class="h-5 w-5 flex-shrink-0"
 									xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +50,7 @@
 								<path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
 							</svg>
 							<a
-								href={elem.path}
+								href={route(elem.path)}
 								class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-300"
 								aria-current={i === path.length - 1 ? 'page' : undefined}
 								>{elem.name}</a

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Head from '$lib/Head.svelte';
+	import {route} from '$lib/core/config';
 </script>
 
 <Head home={true} />
@@ -154,13 +155,13 @@
 	>
 		<div class="mt-8 flex flex-wrap justify-center gap-3">
 			<a
-				href="blog/"
+				href={route('blog/')}
 				class="inline-flex items-center justify-center rounded-md border border-transparent bg-yellow-300 px-4 py-3 text-base font-medium text-black hover:bg-yellow-500 sm:px-16"
 			>
 				Read My Blog
 			</a>
 			<a
-				href="portfolio/"
+				href={route('portfolio/')}
 				class="inline-flex items-center justify-center rounded-md border border-transparent bg-gray-800 px-4 py-3 text-base font-medium text-yellow-300 hover:bg-gray-700 sm:px-16"
 			>
 				Check My Portfolio

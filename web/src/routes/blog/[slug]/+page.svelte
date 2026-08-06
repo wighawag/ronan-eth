@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {formatDate} from '$lib/utils';
 	import Head from '$lib/Head.svelte';
+	import {route} from '$lib/core/config';
 	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 	import '$lib/components/blog/prism-theme.css';
 
@@ -78,7 +79,7 @@
 			<div class="mt-8 flex justify-center">
 				<div class="inline-flex rounded-md shadow">
 					<a
-						href="../"
+						href={route('../')}
 						class="inline-flex items-center justify-center rounded-md border border-transparent bg-yellow-300 px-5 py-3 text-base font-medium text-black hover:bg-yellow-400"
 					>
 						More Blog Posts

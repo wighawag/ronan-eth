@@ -4,11 +4,12 @@ import {
 	getHashParamsFromLocation,
 	getParamsFromLocation,
 } from './utils/web/url';
+import {createRouteHandler} from './utils/web/path';
 
 export const serviceWorker = createServiceWorker();
 
 export const hashParams = getHashParamsFromLocation();
-export const {params} = getParamsFromLocation();
+const {params: paramsFromLocation} = getParamsFromLocation();
 
 export const globalQueryParams = [
 	'debug',
@@ -17,6 +18,22 @@ export const globalQueryParams = [
 	'debugLabel',
 	'eruda',
 	'grid',
-];
+] as const;
+
+/**
+ * Build links with `route(...)` so the `globalQueryParams` above survive
+ * navigation. It accepts app-absolute (`/portfolio/`) and relative (`../`,
+ * `./`, `portfolio/`) paths alike, and returns external URLs untouched.
+ */
+export const {route, isSameRoute, isParentRoute, params} = createRouteHandler(
+	paramsFromLocation,
+	{
+		globalQueryParams,
+		// Add entries here for routes whose last segment is dynamic, so they keep
+		// working on path-based IPFS gateways. e.g.:
+		// {pattern: /^(\/projects\/)([^/]+)\/?$/, basePath: '/projects/'}
+		dynamicRoutes: [],
+	},
+);
 
 console.log(`VERSION: ${version}`);

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {onMount} from 'svelte';
 	import Head from '$lib/Head.svelte';
+	import {route} from '$lib/core/config';
 	import {
 		resolveKind,
 		resolveFrame,
@@ -77,7 +78,9 @@
 		<div
 			class="flex items-center gap-3 border-b border-gray-800 px-4 py-2 text-sm text-gray-400 sm:px-6"
 		>
-			<a href="../../portfolio/" class="hover:text-gray-200">&larr; Portfolio</a>
+			<a href={route('../../portfolio/')} class="hover:text-gray-200"
+				>&larr; Portfolio</a
+			>
 			<span class="font-medium text-gray-100">{project.name}</span>
 			<span class="hidden sm:inline">· {project.title}</span>
 			<div class="ml-auto flex gap-3">
@@ -105,14 +108,15 @@
 	</div>
 {:else if inline}
 	<div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-		<div
-			class="mb-6 flex items-center gap-3 border-b border-gray-800 pb-3"
-		>
-			<a href="../../portfolio/" class="text-sm text-gray-400 hover:text-gray-200"
-				>&larr; Portfolio</a
+		<div class="mb-6 flex items-center gap-3 border-b border-gray-800 pb-3">
+			<a
+				href={route('../../portfolio/')}
+				class="text-sm text-gray-400 hover:text-gray-200">&larr; Portfolio</a
 			>
 			<span class="font-semibold text-gray-100">{project.name}</span>
-			<span class="hidden text-sm text-gray-400 sm:inline">· {project.title}</span>
+			<span class="hidden text-sm text-gray-400 sm:inline"
+				>· {project.title}</span
+			>
 			<div class="ml-auto flex gap-3 text-sm">
 				<a
 					class="text-yellow-300 hover:underline"
@@ -141,8 +145,9 @@
 	</div>
 {:else}
 	<div class="mx-auto max-w-2xl px-4 py-10 sm:px-6 lg:px-8">
-		<a href="../../portfolio/" class="text-sm text-gray-400 hover:text-gray-200"
-			>&larr; Portfolio</a
+		<a
+			href={route('../../portfolio/')}
+			class="text-sm text-gray-400 hover:text-gray-200">&larr; Portfolio</a
 		>
 
 		<header class="mt-6 flex items-start justify-between gap-3">
