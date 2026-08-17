@@ -24,7 +24,6 @@ export const globalQueryParams = [
 	'traceLevel',
 	'debugLabel',
 	'eruda',
-	'grid',
 ] as const;
 
 /**
