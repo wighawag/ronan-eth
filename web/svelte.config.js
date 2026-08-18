@@ -50,7 +50,8 @@ const config = {
 			strict: false,
 		}),
 		serviceWorker: {
-			// we handle it ourselves here : src/service-worker-handler.ts
+			// we handle it ourselves: the worker is src/service-worker/index.ts and
+			// registration is driven by src/lib/core/service-worker/index.ts
 			register: false,
 		},
 		paths: {
