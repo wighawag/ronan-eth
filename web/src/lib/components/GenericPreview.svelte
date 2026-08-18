@@ -14,9 +14,7 @@
 	// Pick a comfortable size from the name length. In a monospace face each
 	// glyph is ~0.6em wide, so estimate the natural width and only clamp with
 	// textLength when it would overflow (so short names are NOT stretched).
-	const fontSize = $derived(
-		name.length > 22 ? 42 : name.length > 14 ? 52 : 64,
-	);
+	const fontSize = $derived(name.length > 22 ? 42 : name.length > 14 ? 52 : 64);
 	const naturalWidth = $derived(name.length * fontSize * 0.6);
 	const clamp = $derived(naturalWidth > MAX_TEXT);
 	const gridId = $derived(
@@ -32,12 +30,7 @@
 	aria-label={name}
 >
 	<defs>
-		<pattern
-			id={gridId}
-			width="32"
-			height="32"
-			patternUnits="userSpaceOnUse"
-		>
+		<pattern id={gridId} width="32" height="32" patternUnits="userSpaceOnUse">
 			<path d="M32 0H0V32" fill="none" stroke="#1f2937" stroke-width="1" />
 		</pattern>
 	</defs>

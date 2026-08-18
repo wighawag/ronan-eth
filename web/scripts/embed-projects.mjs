@@ -52,7 +52,9 @@ async function readEmbedsFromSource() {
 
 async function main() {
 	if (!existsSync(buildDir)) {
-		console.error(`[embed] build dir not found: ${buildDir} (run vite build first)`);
+		console.error(
+			`[embed] build dir not found: ${buildDir} (run vite build first)`,
+		);
 		process.exit(1);
 	}
 
@@ -96,7 +98,9 @@ async function main() {
 		await cp(src, dest, {recursive: true});
 		const count = (await readdir(dest)).length;
 		const rel = wrapped ? `${baseRel}/${id}/_site/` : `${baseRel}/${id}/`;
-		console.log(`[embed] ${id} (${frame}): copied ${buildPath} -> ${rel} (${count} entries)`);
+		console.log(
+			`[embed] ${id} (${frame}): copied ${buildPath} -> ${rel} (${count} entries)`,
+		);
 	}
 
 	if (failures) {

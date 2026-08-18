@@ -279,16 +279,17 @@ export const projects: Project[] = [
 		name: 'anonctl',
 		title: 'Give one Unix account a leak-proof internet connection',
 		description:
-			'Forces everything a Unix account does (a shell, any tool, an editor, a script) through an anonymizer like Tor, enforced by the Linux kernel, fail-closed: if the anonymizer is down, that account\'s traffic is dropped, never sent in the clear. Ships a verify command that PROVES the account is anonymized instead of asking you to trust it.',
+			"Forces everything a Unix account does (a shell, any tool, an editor, a script) through an anonymizer like Tor, enforced by the Linux kernel, fail-closed: if the anonymizer is down, that account's traffic is dropped, never sent in the clear. Ships a verify command that PROVES the account is anonymized instead of asking you to trust it.",
 		sourcecode: 'https://github.com/wighawag/anonctl',
 		tags: ['tooling', 'privacy', 'cli'],
 	},
 	{
 		id: 'netcage',
 		name: 'netcage',
-		title: 'Run any containerized tool with its egress forced through a proxy, fail-closed',
+		title:
+			'Run any containerized tool with its egress forced through a proxy, fail-closed',
 		description:
-			'Wraps a container image and command so ALL of its TCP and DNS egress is forced through a SOCKS5h proxy by the network layer (not the tool\'s own proxy awareness), fail-closed: if the proxy is unreachable, traffic is dropped, never sent to the host network. Ships a verify leak-test that proves no traffic escapes the proxy.',
+			"Wraps a container image and command so ALL of its TCP and DNS egress is forced through a SOCKS5h proxy by the network layer (not the tool's own proxy awareness), fail-closed: if the proxy is unreachable, traffic is dropped, never sent to the host network. Ships a verify leak-test that proves no traffic escapes the proxy.",
 		sourcecode: 'https://github.com/wighawag/netcage',
 		tags: ['tooling', 'privacy', 'cli'],
 	},
@@ -317,7 +318,8 @@ export const projects: Project[] = [
 	{
 		id: 'webhands',
 		name: 'webhands',
-		title: 'Let your AI agent drive a real, logged-in browser on your own machine',
+		title:
+			'Let your AI agent drive a real, logged-in browser on your own machine',
 		description:
 			'A small CLI (and MCP server) that gives an agent hands on a real Chromium browser. It reuses a browser YOU logged into yourself, on your machine and your IP, so the agent can read and act on the web apps you already use, via composable page verbs (goto, snapshot, click, type, eval, script, wait).',
 		sourcecode: 'https://github.com/wighawag/webhands',
@@ -539,8 +541,10 @@ export const projects: Project[] = [
 	{
 		id: 'webveil',
 		name: 'webveil',
-		title: 'Anonymous-capable, self-hosted, account-free web search and fetch for agents',
-		description: 'Anonymous-capable, self-hosted, account-free web search and fetch for agents. CLI + MCP (built on incur), pi-agnostic. Swappable backend and egress (direct, http proxy, socks5/Tor).',
+		title:
+			'Anonymous-capable, self-hosted, account-free web search and fetch for agents',
+		description:
+			'Anonymous-capable, self-hosted, account-free web search and fetch for agents. CLI + MCP (built on incur), pi-agnostic. Swappable backend and egress (direct, http proxy, socks5/Tor).',
 		url: 'https://www.npmjs.com/package/webveil',
 		sourcecode: 'https://github.com/wighawag/webveil',
 		tags: ['tooling'],
@@ -599,16 +603,17 @@ export const projects: Project[] = [
 		name: 'unisig',
 		title: 'Universal signals: a facade over any signal library',
 		description:
-			'A framework-agnostic, zero-dependency facade over any signal library\'s reactive primitives (reactive, signal, effect), with pluggable adapters for Svelte 5 and Solid.js so libraries can stay reactivity-agnostic.',
+			"A framework-agnostic, zero-dependency facade over any signal library's reactive primitives (reactive, signal, effect), with pluggable adapters for Svelte 5 and Solid.js so libraries can stay reactivity-agnostic.",
 		sourcecode: 'https://github.com/wighawag/unisig',
 		tags: ['library'],
 	},
 	{
 		id: 'schema-for',
 		name: 'schema-for',
-		title: 'Pin a Zod schema to your canonical TypeScript types by exact identity',
+		title:
+			'Pin a Zod schema to your canonical TypeScript types by exact identity',
 		description:
-			'A tiny, zero-dependency Zod 4 helper that forces, at compile time, a schema\'s input and output types to be EXACTLY your hand-written canonical types (not just assignable), so it catches extra keys and narrowed values the usual annotation lets through. Transform-aware and zero runtime cost.',
+			"A tiny, zero-dependency Zod 4 helper that forces, at compile time, a schema's input and output types to be EXACTLY your hand-written canonical types (not just assignable), so it catches extra keys and narrowed values the usual annotation lets through. Transform-aware and zero runtime cost.",
 		sourcecode: 'https://github.com/wighawag/schema-for',
 		tags: ['library'],
 	},
@@ -670,7 +675,7 @@ export const projects: Project[] = [
 		name: 'revm-wasm',
 		title: 'revm compiled to WebAssembly, with a typed JS API',
 		description:
-			'An unofficial binding that compiles revm (bluealloy, MIT) to WebAssembly with a typed JavaScript API, so you can run a real EVM in a browser (or any JS runtime) with no Rust toolchain. The EVM is revm\'s; this package is the build config, host interface and decoder.',
+			"An unofficial binding that compiles revm (bluealloy, MIT) to WebAssembly with a typed JavaScript API, so you can run a real EVM in a browser (or any JS runtime) with no Rust toolchain. The EVM is revm's; this package is the build config, host interface and decoder.",
 		url: 'https://www.npmjs.com/package/revm-wasm',
 		sourcecode: 'https://github.com/wighawag/revm-wasm',
 		tags: ['library', 'web3'],
@@ -782,7 +787,8 @@ export const projects: Project[] = [
 		id: 'erc721-users',
 		name: 'erc721-users',
 		title: 'ERC-721 with user accounts',
-		description: 'An ERC-721 extension that tracks per-token users separately from owners, so apps can grant user-level permissions distinct from token ownership.',
+		description:
+			'An ERC-721 extension that tracks per-token users separately from owners, so apps can grant user-level permissions distinct from token ownership.',
 		sourcecode: 'https://github.com/wighawag/erc721-users',
 		tags: ['library', 'web3'],
 		visible: false,
@@ -790,8 +796,9 @@ export const projects: Project[] = [
 	{
 		id: 'CryptoLife',
 		name: 'CryptoLife',
-		title: 'Conway\'s Game of Life on-chain',
-		description: 'An on-chain implementation of Conway\'s Game of Life, where the cellular automaton evolves on the blockchain.',
+		title: "Conway's Game of Life on-chain",
+		description:
+			"An on-chain implementation of Conway's Game of Life, where the cellular automaton evolves on the blockchain.",
 		sourcecode: 'https://github.com/wighawag/CryptoLife',
 		tags: ['game', 'onchain'],
 		visible: false,
@@ -800,7 +807,8 @@ export const projects: Project[] = [
 		id: 'mystery-box',
 		name: 'mystery-box',
 		title: 'Randomised mystery boxes as NFTs',
-		description: 'A system for creating randomised mystery boxes as NFTs, where the contents are revealed only after opening.',
+		description:
+			'A system for creating randomised mystery boxes as NFTs, where the contents are revealed only after opening.',
 		sourcecode: 'https://github.com/wighawag/mystery-box',
 		tags: ['web3', 'onchain'],
 		visible: false,
@@ -809,7 +817,8 @@ export const projects: Project[] = [
 		id: 'template-on-chain-art',
 		name: 'template-on-chain-art',
 		title: 'Template for fully on-chain generative art',
-		description: 'A template for building fully on-chain generative art projects, with on-chain tokenURI and zero external dependencies.',
+		description:
+			'A template for building fully on-chain generative art projects, with on-chain tokenURI and zero external dependencies.',
 		sourcecode: 'https://github.com/wighawag/template-on-chain-art',
 		tags: ['art', 'onchain'],
 		visible: false,
@@ -818,7 +827,8 @@ export const projects: Project[] = [
 		id: 'sveltore',
 		name: 'sveltore',
 		title: 'A tiny store utility for Svelte',
-		description: 'A small store utility for Svelte that provides writable and readable stores with extra helpers.',
+		description:
+			'A small store utility for Svelte that provides writable and readable stores with extra helpers.',
 		sourcecode: 'https://github.com/wighawag/sveltore',
 		tags: ['library'],
 		visible: false,
@@ -827,7 +837,8 @@ export const projects: Project[] = [
 		id: 'ethereum-lan-node',
 		name: 'ethereum-lan-node',
 		title: 'Run an Ethereum node on your LAN',
-		description: 'Tooling to run and configure an Ethereum node accessible on your local network, for development and testing.',
+		description:
+			'Tooling to run and configure an Ethereum node accessible on your local network, for development and testing.',
 		sourcecode: 'https://github.com/wighawag/ethereum-lan-node',
 		tags: ['tooling', 'web3'],
 		visible: false,
@@ -836,7 +847,8 @@ export const projects: Project[] = [
 		id: 'dungeoncaster',
 		name: 'dungeoncaster',
 		title: 'On-chain dungeon game',
-		description: 'An on-chain dungeon game where players explore and interact with a dungeon generated on the blockchain.',
+		description:
+			'An on-chain dungeon game where players explore and interact with a dungeon generated on the blockchain.',
 		sourcecode: 'https://github.com/wighawag/dungeoncaster',
 		tags: ['game', 'onchain'],
 		visible: false,
@@ -845,7 +857,8 @@ export const projects: Project[] = [
 		id: 'erc721-lease',
 		name: 'erc721-lease',
 		title: 'Lease your ERC-721 tokens',
-		description: 'An ERC-721 extension that lets token owners lease their NFTs to other users for a period, granting the lessee user-level access without transferring ownership.',
+		description:
+			'An ERC-721 extension that lets token owners lease their NFTs to other users for a period, granting the lessee user-level access without transferring ownership.',
 		sourcecode: 'https://github.com/wighawag/erc721-lease',
 		tags: ['library', 'web3'],
 		visible: false,
@@ -854,7 +867,8 @@ export const projects: Project[] = [
 		id: 'universal-forwarder',
 		name: 'universal-forwarder',
 		title: 'A universal forwarder for meta-transactions',
-		description: 'A universal forwarder contract that enables gasless meta-transactions, letting a relayer submit a transaction on behalf of a user who signed the intent.',
+		description:
+			'A universal forwarder contract that enables gasless meta-transactions, letting a relayer submit a transaction on behalf of a user who signed the intent.',
 		sourcecode: 'https://github.com/wighawag/universal-forwarder',
 		tags: ['library', 'web3'],
 		visible: false,
@@ -863,7 +877,8 @@ export const projects: Project[] = [
 		id: 'transfer-gateway',
 		name: 'transfer-gateway',
 		title: 'A gateway for cross-chain token transfers',
-		description: 'A gateway contract for transferring tokens across chains, handling locking and minting on the source and destination.',
+		description:
+			'A gateway contract for transferring tokens across chains, handling locking and minting on the source and destination.',
 		sourcecode: 'https://github.com/wighawag/transfer-gateway',
 		tags: ['library', 'web3'],
 		visible: false,
@@ -881,7 +896,8 @@ export const projects: Project[] = [
 		id: 'js24k-on-chain',
 		name: 'js24k-on-chain',
 		title: 'A 24kB JavaScript game fully on-chain',
-		description: 'A JavaScript game built to fit in 24kB, stored and executed fully on-chain with zero external dependencies.',
+		description:
+			'A JavaScript game built to fit in 24kB, stored and executed fully on-chain with zero external dependencies.',
 		sourcecode: 'https://github.com/wighawag/js24k-on-chain',
 		tags: ['game', 'onchain'],
 		visible: false,
@@ -890,7 +906,8 @@ export const projects: Project[] = [
 		id: 'js13k-on-chain',
 		name: 'js13k-on-chain',
 		title: 'A 13kB JavaScript game fully on-chain',
-		description: 'A JavaScript game built to fit in 13kB, stored and executed fully on-chain with zero external dependencies.',
+		description:
+			'A JavaScript game built to fit in 13kB, stored and executed fully on-chain with zero external dependencies.',
 		sourcecode: 'https://github.com/wighawag/js13k-on-chain',
 		tags: ['game', 'onchain'],
 		visible: false,
@@ -899,7 +916,8 @@ export const projects: Project[] = [
 		id: 'conquest-boardgame',
 		name: 'conquest-boardgame',
 		title: 'A physical board game adaptation of conquest.eth',
-		description: 'A physical board game adaptation of the on-chain strategy game conquest.eth.',
+		description:
+			'A physical board game adaptation of the on-chain strategy game conquest.eth.',
 		sourcecode: 'https://github.com/wighawag/conquest-boardgame',
 		tags: ['game'],
 		visible: false,
@@ -908,7 +926,8 @@ export const projects: Project[] = [
 		id: 'the-bleep-machine',
 		name: 'the-bleep-machine',
 		title: 'A machine that plays Bleeps',
-		description: 'A physical machine that plays the on-chain Bleeps sounds, bridging the digital and physical.',
+		description:
+			'A physical machine that plays the on-chain Bleeps sounds, bridging the digital and physical.',
 		sourcecode: 'https://github.com/wighawag/the-bleep-machine',
 		tags: ['art'],
 		visible: false,
@@ -917,7 +936,8 @@ export const projects: Project[] = [
 		id: 'particle-emitter-editor',
 		name: 'particle-emitter-editor',
 		title: 'A visual editor for particle emitters',
-		description: 'A visual editor for creating and tuning particle emitter configurations, exportable for use in games and animations.',
+		description:
+			'A visual editor for creating and tuning particle emitter configurations, exportable for use in games and animations.',
 		sourcecode: 'https://github.com/wighawag/particle-emitter-editor',
 		tags: ['tooling'],
 		visible: false,
@@ -961,4 +981,6 @@ export function isRemoteEmbed(p: Project): boolean {
 	return Boolean(p.embedUrl);
 }
 
-export const embeddedProjects = projects.filter((p) => resolveKind(p) === 'embed');
+export const embeddedProjects = projects.filter(
+	(p) => resolveKind(p) === 'embed',
+);

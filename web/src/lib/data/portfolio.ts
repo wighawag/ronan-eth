@@ -51,7 +51,11 @@ const noImageLeadProjects = noImageLead
 	.filter((p): p is Project => Boolean(p));
 
 // Image-having projects first, then the pinned no-image lead, then the rest.
-const remaining = [...remainingImage, ...noImageLeadProjects, ...remainingNoImage];
+const remaining = [
+	...remainingImage,
+	...noImageLeadProjects,
+	...remainingNoImage,
+];
 
 /**
  * A synthetic tile, pinned LAST, that links to the full GitHub profile. It is
