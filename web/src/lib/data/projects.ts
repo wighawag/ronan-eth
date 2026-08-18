@@ -655,13 +655,14 @@ export const projects: Project[] = [
 		tags: ['library', 'web3'],
 	},
 	{
-		id: 'embedded-eth-node',
-		name: 'embedded-eth-node',
+		id: 'webevm',
+		name: 'webevm',
 		title: 'A slim, in-browser EIP-1193 Ethereum node',
 		description:
 			'A slim, execution-only in-browser EIP-1193 Ethereum node built on @ethereumjs/vm. It sits between bare EVM.runCall (too low-level: no blocks/receipts/logs) and a full in-browser node (heavy): it runs real transactions with a minimal mock block/receipt/log layer, exposing a standard provider so an app or test can use a real EVM without a backend.',
-		url: 'https://www.npmjs.com/package/embedded-eth-node',
-		sourcecode: 'https://github.com/wighawag/embedded-eth-node',
+		url: 'https://www.npmjs.com/package/webevm',
+		image: '/images/portfolio/webevm-preview.png',
+		sourcecode: 'https://github.com/wighawag/webevm',
 		tags: ['library', 'web3'],
 	},
 	{
