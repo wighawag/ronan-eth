@@ -646,6 +646,7 @@ export const projects: Project[] = [
 		description:
 			'Creates clone contracts whose immutable arguments are stored in the code region of the proxy and appended to the delegatecall calldata on every call, so the implementation reads them straight from calldata. Cheaper to deploy and to run than EIP-1167 (no storage writes/loads), since the parameters live in code, not storage.',
 		url: 'https://www.npmjs.com/package/clones-with-immutable-args',
+		image: '/images/portfolio/clones-with-immutable-args-preview.png',
 		sourcecode: 'https://github.com/wighawag/clones-with-immutable-args',
 		tags: ['library', 'web3'],
 	},

@@ -38,7 +38,7 @@ const visible = projects.filter((p) => p.visible !== false);
 
 /** No-image projects to pin at the FRONT of the no-image bucket (right after
  * the last image card), in this order. */
-const noImageLead = ['clones-with-immutable-args'];
+const noImageLead: string[] = [];
 const noImageLeadIds = new Set(noImageLead);
 
 const remainingAll = visible.filter((p) => !leadIds.has(p.id));
@@ -48,7 +48,7 @@ const remainingNoImage = remainingAll.filter(
 );
 const noImageLeadProjects = noImageLead
 	.map((id) => bySlugRaw(id))
-	.filter((p): p is Project => Boolean(p));
+	.filter((p): p is Project => !!p && !p.image);
 
 // Image-having projects first, then the pinned no-image lead, then the rest.
 const remaining = [
