@@ -53,10 +53,6 @@
 			faviconIco: url('/pwa/favicon.ico'),
 			appleTouchIcon: url('/pwa/apple-touch-icon.png'),
 			manifest: url('/pwa/manifest.webmanifest'),
-			// the RSS autodiscovery link is relative for the same reason, and rots
-			// in exactly the same way: a reader landing on a nested route would be
-			// pointed at `<route>/feed.xml`
-			feed: url('/feed.xml'),
 		};
 	});
 
@@ -105,7 +101,7 @@
 		rel="alternate"
 		type="application/rss+xml"
 		title="{name} - Blog"
-		href={pwa.feed}
+		href={url('/feed.xml')}
 	/>
 
 	<!-- extra info -->
