@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Head from '$lib/Head.svelte';
-	import {route} from '$lib/core/config';
+	import {route} from '$lib';
 </script>
 
 <Head home={true} />

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {url} from '$lib/core/utils/web/path';
+	import {url} from '$lib/kit/paths';
 
 	const feed = $derived(url('/feed.xml'));
 </script>

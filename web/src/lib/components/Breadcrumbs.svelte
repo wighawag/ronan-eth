@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {route} from '$lib/core/config';
+	import {route} from '$lib';
 
 	interface Props {
 		path?: {name: string; path: string}[];

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Notifications from '$lib/core/notifications/Notifications.svelte';
 	import VersionAndInstallNotfications from '$lib/core/service-worker/VersionAndInstallNotfications.svelte';
-	import {notifications, serviceWorker} from '$lib/core/config';
+	import {notifications, serviceWorker} from '$lib';
 	import Footer from '$lib/components/Footer.svelte';
 	import RssCallToAction from '$lib/components/RssCallToAction.svelte';
 	import NavigationProgress from '$lib/components/NavigationProgress.svelte';
-	import {page} from '$app/state';
+	import {navigating, page} from '$app/state';
 	import '../app.css';
 	let {children} = $props();
 
@@ -15,7 +15,7 @@
 	const fullBleed = $derived(Boolean(page.data?.fullBleed));
 </script>
 
-<NavigationProgress />
+<NavigationProgress isNavigating={() => !!navigating.to} />
 
 {#if fullBleed}
 	<main class="flex min-h-dvh flex-col bg-black text-gray-100">

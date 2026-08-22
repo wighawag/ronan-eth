@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {dev, version} from '$app/environment';
+	import {version} from '$lib/kit/environment';
 	import {page} from '$app/state';
 
 	import {
@@ -10,7 +10,7 @@
 		appleStatusBarStyle,
 		ENSName,
 	} from '../web-config.json';
-	import {url} from '$lib/core/utils/web/path';
+	import {url} from '$lib/kit/paths';
 
 	const host = canonicalURL.endsWith('/')
 		? canonicalURL.slice(0, -1)

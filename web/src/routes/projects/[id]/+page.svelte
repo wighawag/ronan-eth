@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {onMount} from 'svelte';
 	import Head from '$lib/Head.svelte';
-	import {route} from '$lib/core/config';
+	import {route} from '$lib';
 	import {
 		resolveKind,
 		resolveFrame,

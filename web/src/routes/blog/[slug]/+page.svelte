@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {formatDate} from '$lib/utils';
 	import Head from '$lib/Head.svelte';
-	import {route} from '$lib/core/config';
+	import {route} from '$lib';
 	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 	import '$lib/components/blog/prism-theme.css';
 
