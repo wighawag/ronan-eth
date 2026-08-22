@@ -323,6 +323,7 @@ export const projects: Project[] = [
 		description:
 			'A small CLI (and MCP server) that gives an agent hands on a real Chromium browser. It reuses a browser YOU logged into yourself, on your machine and your IP, so the agent can read and act on the web apps you already use, via composable page verbs (goto, snapshot, click, type, eval, script, wait).',
 		sourcecode: 'https://github.com/wighawag/webhands',
+		image: '/images/portfolio/webhands-preview.png',
 		tags: ['tooling', 'agents'],
 	},
 	{
@@ -351,6 +352,7 @@ export const projects: Project[] = [
 		description:
 			'A modular, AI-driven toolkit that solves CAPTCHAs through a shared perceive / plan / act loop with pluggable solver brains and interchangeable front-ends (a browser extension and a Playwright driver). It is also designed to serve as the hands for webhands, letting an agent act on a real browser to get past a challenge.',
 		sourcecode: 'https://github.com/wighawag/iamhuman',
+		image: '/images/portfolio/iamhuman-preview.png',
 		tags: ['tooling', 'agents'],
 	},
 	{
@@ -422,7 +424,19 @@ export const projects: Project[] = [
 			'A CLI that generates an optimized, deliberately small set of favicons and a web manifest from a single input image and a config file, following modern favicon best practice, and can optionally inject the matching PWA meta tags into your HTML.',
 		url: 'https://www.npmjs.com/package/pwag',
 		sourcecode: 'https://github.com/wighawag/pwag',
+		image: '/images/portfolio/pwag-preview.png',
 		tags: ['library', 'web'],
+	},
+	{
+		id: 'memonaut',
+		name: 'memonaut',
+		title: 'Index and search your AI agent conversation transcripts',
+		description:
+			'Agents write everything down and then forget it, leaving gigabytes of JSONL nobody can grep usefully. memonaut indexes it all into one local SQLite file, queryable in milliseconds from the CLI or by an agent asked what you decided six weeks ago, and it is fork-aware: a match in shared history lists every conversation that inherited it, rather than the same thread N times.',
+		url: 'https://www.npmjs.com/package/memonaut',
+		sourcecode: 'https://github.com/wighawag/memonaut',
+		image: '/images/portfolio/memonaut-preview.png',
+		tags: ['tooling', 'cli', 'agents'],
 	},
 	{
 		id: 'set-defaults',
