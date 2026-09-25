@@ -1,0 +1,46 @@
+# Files this repo deliberately does NOT carry from its template.
+#
+# WHAT THIS IS FOR. Every repo in this tree merges from a `stem` remote. A file
+# that a descendant has deleted is not a settled decision as far as git is
+# concerned: the next time the template TOUCHES that file, the cascade stops
+# with a modify/delete conflict, and whoever is running it has to work out from
+# scratch whether the deletion was deliberate.
+#
+# Listing the path here does not change what git does - the conflict still
+# happens - but it makes the answer a lookup instead of an excavation, and
+# `scripts/apply-omissions.sh` turns the resolution into one command.
+#
+# FORMAT. One path per line, relative to the repo root. `#` starts a comment.
+# Give every entry a reason: the next person's question is never "which file",
+# it is "why", and an unexplained list is how a deletion outlives the reason for
+# it and becomes cargo cult. A DIRECTORY entry covers everything under it, which
+# is usually what you want: a whole replaced directory rather than forty files.
+#
+# THREE GUARDS, all pointing different ways:
+#
+#   web/test/offshoot-omissions.test.ts   every LISTED path is still absent
+#   scripts/check-omissions.mjs           every ABSENT path is listed (needs the stem)
+#   scripts/apply-omissions.sh            re-drop them all, and run both checks
+#
+# ENTRIES ARE STEM-RELATIVE: what belongs here is what THIS repo drops from ITS
+# stem, `template-svelte-tailwind-blog`. That template's own list is empty, so
+# there is nothing to copy down and nothing of its should ever appear here.
+
+# ---------------------------------------------------------------------------
+# THE TEMPLATE'S TWO SAMPLE POSTS, which exist to show the blog working with
+# something in it. This is a real blog with seven real posts in the same
+# directory, so the samples would publish as two placeholder articles under this
+# author's name.
+#
+# LISTED AS TWO FILES AND NOT AS `web/src/posts`, which is the distinction worth
+# noticing: the DIRECTORY is very much wanted here and full of this repo's own
+# content, so a directory entry would be a claim that it should be absent - and
+# `offshoot-omissions.test.ts` would fail on it immediately, correctly. Name the
+# directory only when the whole directory is what you replaced.
+#
+# These two were the first thing the omissions guard reported in this repo, on the
+# cascade that brought the guard itself, which is the mechanism doing exactly what
+# it was written for: it refused to let the merge be committed until the deletion
+# had a reason next to it.
+web/src/posts/first-post.md
+web/src/posts/second-post.md
