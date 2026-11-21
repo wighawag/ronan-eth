@@ -34,8 +34,8 @@ export default defineConfig({
 	build: {
 		emptyOutDir: true,
 		minify: true, // shrink chunks so large files don't stall on slow /
-		// throttled connections (an unminified 540KB single bundle hung
-		// under Chrome's request-level throttling)
+		// throttled connections (an unminified single bundle hung under
+		// Chrome's request-level throttling)
 		sourcemap: true,
 	},
 	server: {

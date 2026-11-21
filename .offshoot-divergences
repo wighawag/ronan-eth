@@ -18,17 +18,31 @@
 #
 # FORMAT. One file per line: its path, then its reason. `#` starts a comment.
 # A line `[<branch>]` starts a section; this repo has one node, `main`, so it
-# has none: every entry is what template-svelte-tailwind-blog `main` modifies from
-# template-svelte-tailwind `main`. A child REPO never keeps these entries: its
+# has none: every entry is what ronan-eth `main` modifies from
+# template-svelte-tailwind-blog `main`. A child REPO never keeps these entries: its
 # list is its own, written against this repo, and until it writes one it
 # carries this file unchanged and the check says it has none.
 
 # The workspace
-.offshoot-omissions     this repo's own section below the stem's: it omits nothing, and says why its sites' lists are where omissions belong
-pnpm-lock.yaml          the lockfile with mdsvex and rehype-slug added
-web/package.json        mdsvex, which compiles the Markdown posts, and rehype-slug, which gives their headings an id
-web/svelte.config.js    mdsvex as a preprocessor for `.md` (with the VitePress containers and heading ids), and the adapter's `strict: false` (adapter-static's every-route-prerenders check off), both from the posts' arrival
+.offshoot-omissions                              this site's own list: the template's two sample posts, which would publish as placeholder articles beside the real ones
+package.json                                     the workspace's name, and pinnace, which builds the embedded projects
+pnpm-lock.yaml                                   the lockfile with pinnace added
+web/package.json                                 the build followed by `scripts/embed-projects.mjs`, which copies the embedded projects in
+web/svelte.config.js                             the prerender crawl told that a project's `_site/` iframe is copied in after the build
 
-# The blog
-web/src/app.css         the VitePress-style custom containers (`::: info`, tip, warning, danger) the posts use
-web/src/lib/Head.svelte the feed's autodiscovery link, so readers find `/feed.xml`
+# The site
+web/src/app.html                                 the site's yellow loading accent
+web/src/app.css                                  the site's dark base and yellow accent (and the comments' indentation, as prettier leaves it here)
+web/src/web-config.json                          the site's name, description, URL, ENS name and colours
+web/static/icon.png                              the site's icon
+web/src/lib/components/NavigationProgress.svelte the bar's fallback colour, the site's yellow accent
+web/src/lib/index.ts                             the path resolver's comments name this site's routes (portfolio, projects)
+web/src/routes/+layout.svelte                    the site's footer and RSS call to action, dropped for the full-bleed project pages
+web/src/routes/+page.svelte                      the home page
+web/src/routes/blog/+page.svelte                 the blog index in the site's design
+web/src/routes/blog/[slug]/+page.svelte          a post in the site's design (its title image, video and caption)
+web/src/lib/blog/source.ts                       the posts' own frontmatter fields (title image, Medium link, video, caption)
+
+# Candidates for the stem: generic, so each belongs at template-svelte-tailwind-blog or above, and goes when it lands there
+web/src/lib/utils.ts                             `formatDate` taking the `Date` or ISO string mdsvex's YAML produces for an unquoted date, and '' for an invalid one
+web/src/routes/+layout.ts                        a note that Firefox cannot evaluate the dev service worker (an ES module), so the worker is developed in Chromium
