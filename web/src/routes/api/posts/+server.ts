@@ -1,36 +1,9 @@
 import {json} from '@sveltejs/kit';
-import type {Post} from '$lib/types.js';
+import {listPosts} from '$lib/blog/posts';
+import {postsSource} from '$lib/blog/source';
 
 export const prerender = true;
 
-async function getPosts() {
-	let posts: Post[] = [];
-
-	const paths = import.meta.glob('/src/posts/*.md', {eager: true});
-
-	for (const path in paths) {
-		const file = paths[path];
-		const slug = path.split('/').at(-1)?.replace('.md', '');
-
-		if (file && typeof file === 'object' && 'metadata' in file && slug) {
-			const metadata = file.metadata as Omit<Post, 'slug'>;
-			const post = {...metadata, slug} satisfies Post;
-			// posts are published unless explicitly set to false
-			if (post.published !== false) {
-				posts.push(post);
-			}
-		}
-	}
-
-	posts = posts.sort(
-		(first, second) =>
-			new Date(second.date).getTime() - new Date(first.date).getTime(),
-	);
-
-	return posts;
-}
-
-export async function GET() {
-	const posts = await getPosts();
-	return json(posts);
+export function GET() {
+	return json(listPosts(postsSource));
 }

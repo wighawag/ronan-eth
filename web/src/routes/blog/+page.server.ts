@@ -1,4 +1,4 @@
-import type {Post} from '$lib/types';
+import type {Post} from '$lib/blog/source';
 import type {PageServerLoad} from './$types';
 
 export const load: PageServerLoad = async ({fetch}) => {
