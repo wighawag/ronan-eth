@@ -12,10 +12,13 @@
  */
 import type {BasePost, PostsSource} from './posts';
 
-export type Categories = 'release' | 'updates';
-
 export type Post = BasePost & {
-	categories: Categories[];
+	titleImage?: boolean;
+	mediumLink?: string;
+	video?: string;
+	caption?: string;
+	captionLabel?: string;
+	captionLink?: string;
 	/** A post is published unless this says `false`. */
 	published?: boolean;
 };
